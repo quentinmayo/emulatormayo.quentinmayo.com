@@ -26,6 +26,19 @@ Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam
 
 Prefer hosting it yourself? The optional **[private self-hosted browser player](selfhost/README.md)** remains available with Docker. It is separate from this public product website. The [native Android APK](android/README.md) includes its runtime and needs no login or server.
 
+## Tested devices
+
+Physical hardware checks recorded October 22, 2026. These are specific smoke tests, not certification of every game, core or controller. CI builds for Windows and Intel Mac do not count as physical device tests. No device serials or private server details are published.
+
+| Device | Environment | Verified | Still to check |
+| --- | --- | --- | --- |
+| Samsung Galaxy S24 Ultra | Android 17 | Signed APK; native local library; C64 homebrew boot; touch controls and player toolbar visible. | Physical external-controller gameplay not verified. |
+| Retroid Pocket 5 | Android 13 | Signed APK installed on the handheld. | Local import, gameplay and physical controls are still under test. |
+| Steam Deck | SteamOS, docked 1920 × 1080 | AppImage installation and Desktop Mode launch. | Gaming Mode gameplay and physical controls remain under test. |
+| MacBook Pro (Apple M4 Pro) | macOS, Apple Silicon | C64 core boot; visible player toolbar; pause/resume; save-state export. | Other emulator cores and systems are not certified. |
+
+[Setup and current device notes](https://emulatormayo.quentinmayo.com/getting-started#tested-devices).
+
 ## Develop this website locally
 
 ```sh
