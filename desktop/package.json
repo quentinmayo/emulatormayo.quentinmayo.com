@@ -1,0 +1,72 @@
+{
+  "name": "emulatormayo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Your local EmulatorJS desktop player. Install, choose your own game, press play.",
+  "author": "Quentin Mayo",
+  "license": "MIT",
+  "homepage": "https://emulatormayo.quentinmayo.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com.git"
+  },
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "test:desktop": "playwright test",
+    "dist": "electron-builder --publish never"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.emulatormayo.app",
+    "productName": "Emulatormayo",
+    "artifactName": "Emulatormayo-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "protocol-policy.cjs",
+      "player/**/*",
+      "assets/icon.png",
+      "LICENSE",
+      "THIRD-PARTY-NOTICES.md",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "runtime",
+        "to": "runtime"
+      }
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Game",
+      "icon": "assets/icon.png"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.games",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

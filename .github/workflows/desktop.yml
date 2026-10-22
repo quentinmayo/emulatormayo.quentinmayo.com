@@ -1,0 +1,94 @@
+name: Desktop apps
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    tags: ['desktop-v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: --linux AppImage --x64
+            name: linux-x64
+          - os: windows-latest
+            target: --win nsis --x64
+            name: windows-x64
+          - os: macos-latest
+            target: --mac dmg --arm64
+            name: mac-arm64
+          - os: macos-15-intel
+            target: --mac dmg --x64
+            name: mac-x64
+    runs-on: ${{ matrix.os }}
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: python -m pip install py7zr==1.0.0
+      - run: python scripts/prepare-runtime.py
+      - run: npm test
+      - name: Test Electron on Linux
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:desktop
+      - name: Test Electron on macOS and Windows
+        if: runner.os != 'Linux'
+        run: npm run test:desktop
+      - name: Package installers
+        if: startsWith(github.ref, 'refs/tags/desktop-v') || github.event_name == 'workflow_dispatch'
+        env:
+          BUILD_TARGET: ${{ matrix.target }}
+        shell: bash
+        run: npm run dist -- $BUILD_TARGET
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: startsWith(github.ref, 'refs/tags/desktop-v') || github.event_name == 'workflow_dispatch'
+        with:
+          name: ${{ matrix.name }}
+          path: |
+            desktop/release/*.AppImage
+            desktop/release/*.exe
+            desktop/release/*.dmg
+          if-no-files-found: error
+  publish:
+    needs: desktop
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Publish installers and checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd artifacts
+          sha256sum * > SHA256SUMS.txt
+          gh release create "$GITHUB_REF_NAME" ./* --repo "$GITHUB_REPOSITORY" \
+            --title "Emulatormayo $GITHUB_REF_NAME · Desktop Alpha" --prerelease \
+            --notes-file ../desktop/release-notes.md

@@ -10,3 +10,11 @@ out/
 # Generated private runtime and game storage.
 /selfhost/storage/
 /selfhost/.env
+
+# Generated desktop packages and bundled upstream runtime.
+/desktop/runtime/
+/desktop/player/
+/desktop/LICENSE
+/desktop/release/
+/desktop/test-results/
+/desktop/playwright-report/

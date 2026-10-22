@@ -7,3 +7,4 @@ out
 *.tsbuildinfo
 
 selfhost/
+desktop/
