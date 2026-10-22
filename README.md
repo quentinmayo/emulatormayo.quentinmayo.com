@@ -22,7 +22,7 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.0).
 
-Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users can add it as a non-Steam app with `--deck`. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Physical Steam Deck and controller testing is pending.
+Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users can add it as a non-Steam app with `--deck`. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Installation and Desktop Mode launch have been tested on a real Steam Deck; see the illustrated Steam Deck guide for the current gameplay and controller test status.
 
 Prefer hosting it yourself? The optional **[private self-hosted browser player](selfhost/README.md)** remains available with Docker. It is separate from this public product website. The [native Android APK](android/README.md) includes its runtime and needs no login or server.
 
@@ -53,7 +53,7 @@ I need help affording my AI token usage :) If this project makes your setup a li
 
 ## Search & sharing
 
-The public site includes descriptive page titles, canonical URLs, indexable HTML, PNG social cards, WebSite/Person JSON-LD, a linked [setup guide](https://emulatormayo.quentinmayo.com/getting-started), `robots.txt` and a two-page sitemap. Each page has its own canonical URL and social metadata. Keep titles, descriptions and sitemap entries in sync when adding pages; regenerate `public/og.png` from `public/og.svg` if the social artwork changes.
+The public site includes descriptive page titles, canonical URLs, indexable HTML, PNG social cards, WebSite/Person JSON-LD, a linked [setup guide](https://emulatormayo.quentinmayo.com/getting-started), `robots.txt` and a three-page sitemap. Each page has its own canonical URL and social metadata. Keep titles, descriptions and sitemap entries in sync when adding pages; regenerate `public/og.png` from `public/og.svg` if the social artwork changes.
 
 For indexing diagnostics, verify the production domain in Google Search Console or Bing Webmaster Tools, submit `/sitemap.xml`, and inspect the home and guide URLs. These tools require the site owner's account; publishing metadata does not register the site or guarantee a ranking.
 
@@ -62,9 +62,13 @@ For indexing diagnostics, verify the production domain in Google Search Console 
 In Steam Deck **Desktop Mode**, open Konsole and run:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/securelyprogramming/emulatormayo.quentinmayo.com/main/scripts/install.sh | bash -s -- --steam-deck
+curl -fsSL https://emulatormayo.quentinmayo.com/steam-deck.sh | bash
 ```
 
-For macOS or Linux desktop, use the same command without `-s -- --steam-deck`. [Read the installer](scripts/install.sh) before running it. It verifies the packaged release’s SHA-256 before installing into your account, preserves existing game profiles, and needs no sudo, npm or server. Windows users can use the installer in Downloads above.
+For macOS or Linux desktop, run `curl -fsSL https://emulatormayo.quentinmayo.com/install.sh | bash`. [Read the installer](scripts/install.sh) before running it. It verifies the packaged release’s SHA-256 before installing into your account, preserves existing game profiles, and needs no sudo, npm or server. Windows users can use the installer in Downloads above.
 
 In Desktop Mode, open **Steam → Games → Add a Non-Steam Game** and select **Emulatormayo**. Return to **Gaming Mode → Library → Non-Steam**. The installed launcher includes `--deck`; leave Proton/Compatibility disabled. Choose your own local game file in the app and configure gameplay controls through EmulatorJS. Save/export progress before leaving.
+
+Follow the [illustrated Steam Deck guide](https://emulatormayo.quentinmayo.com/steam-deck) for screenshots, controls and troubleshooting.
+
+![Installed launchers in Steam](public/screenshots/steam-deck-add-to-steam.png)

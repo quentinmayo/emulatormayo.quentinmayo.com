@@ -2,7 +2,7 @@
 
 Install a packaged desktop player, choose a supported system, select your own game file, and press play. **Users do not need Node.js, npm, Docker or a game server.** The pinned EmulatorJS runtime is bundled in each installer.
 
-The public alpha release provides macOS Apple Silicon and Intel DMGs, a Windows x64 installer and a Linux x64 AppImage. Linux/Steam Deck users can make the AppImage executable, add it as a non-Steam app, and use `--deck` to start fullscreen. Physical Steam Deck and controller testing remain pending. Desktop packages are unsigned and not notarized; operating-system publisher checks can apply. There is no automatic updater; install future releases manually.
+The public alpha release provides macOS Apple Silicon and Intel DMGs, a Windows x64 installer and a Linux x64 AppImage. Linux/Steam Deck users can make the AppImage executable, add it as a non-Steam app, and use `--deck` to start fullscreen. Installation and Desktop Mode launch have been tested on a real Steam Deck; see the [illustrated guide](https://emulatormayo.quentinmayo.com/steam-deck) for gameplay and controller test status. Desktop packages are unsigned and not notarized; operating-system publisher checks can apply. There is no automatic updater; install future releases manually.
 
 Game and optional BIOS files use the operating system's file picker. No games, BIOS files or keys are bundled. Saves live in this app's browser profile on this device; use EmulatorJS's export controls for backups or transfers. Reinstalling normally keeps the profile, but deleting app data clears it. No cloud synchronization is provided.
 

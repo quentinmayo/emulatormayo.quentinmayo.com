@@ -19,15 +19,15 @@ export const siteIdentity = {
   ],
 };
 
-export function guideSchema(title: string, description: string) {
-  const url = `${site.url}/getting-started`;
+export function guideSchema(title: string, description: string, path = "/getting-started") {
+  const url = `${site.url}${path}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
       { "@type": "WebPage", "@id": `${url}#page`, url, name: title, description, inLanguage: "en", isPartOf: { "@id": `${site.url}/#website` }, breadcrumb: { "@id": `${url}#breadcrumb` } },
       { "@type": "BreadcrumbList", "@id": `${url}#breadcrumb`, itemListElement: [
         { "@type": "ListItem", position: 1, name: site.name, item: `${site.url}/` },
-        { "@type": "ListItem", position: 2, name: "Getting started", item: url },
+        { "@type": "ListItem", position: 2, name: path === "/steam-deck" ? "Steam Deck" : "Getting started", item: url },
       ] },
     ],
   };
