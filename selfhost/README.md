@@ -17,3 +17,9 @@ Choose a system and a game file from your device. The player reads the file thro
 The default binding is localhost. For a trusted LAN, set `EMULATORMAYO_BIND` to the host's LAN IP. Keep it private or put an authenticated reverse proxy in front of it; this service has no login. Use HTTPS for browser features that require a secure context, including controller APIs in some browsers and threaded cores. COOP/COEP response headers are included but do not make plain HTTP a secure context.
 
 Controller mapping belongs to EmulatorJS's player settings. Device, core, BIOS and browser compatibility vary. No games, BIOS files, keys or third-party ROM download links are bundled.
+
+## More details & support
+
+Visit [Emulatormayo](https://emulatormayo.quentinmayo.com) for an overview and the [setup guide](https://emulatormayo.quentinmayo.com/getting-started) for a walkthrough.
+
+I need help affording my AI token usage :) If the player helps you out, [buy the developers a coffee](https://buymeacoffee.com/quentinmayo). Always optional. Always appreciated.

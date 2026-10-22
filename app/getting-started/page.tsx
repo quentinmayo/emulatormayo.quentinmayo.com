@@ -1,0 +1,21 @@
+import GuideLayout from "../../components/GuideLayout";
+import JsonLd from "../../components/JsonLd";
+import { guideSchema, pageMetadata } from "../../seo";
+
+const title = "Self-host an EmulatorJS player with Emulatormayo";
+const description = "Set up Emulatormayo with Docker and the pinned EmulatorJS runtime. Select local game files, configure controllers and protect your browser saves.";
+export const metadata = pageMetadata(`${title} | Emulatormayo`, description, "/getting-started");
+
+export default function GettingStarted() {
+  return <GuideLayout title={title} introduction="A lightweight browser player for your own EmulatorJS setup. You supply the server and authorized game files; EmulatorJS supplies the emulation engine.">
+    <JsonLd data={guideSchema(title, description)}/>
+    <section className="guide-section"><h2>What you need</h2><p>Use a machine with Docker, Docker Compose and curl, a modern browser and your own authorized game file. Some systems also require a BIOS file. The player is a separate self-hosted service; this public website does not connect to a private game library.</p><p>Emulatormayo has no native Android APK or Electron package yet. Open your self-hosted player in a compatible browser on your phone, tablet or computer. Hardware, core and browser support determine what runs.</p></section>
+    <section className="guide-section"><h2>1. Get the player source</h2><p>Clone the public repository and enter the self-hosted bundle. The public Next.js website and private player are independent services.</p><pre><code>{`git clone https://github.com/securelyprogramming/emulatormayo.quentinmayo.com.git
+cd emulatormayo.quentinmayo.com/selfhost`}</code></pre><p>The <a href="https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/blob/main/selfhost/README.md">self-hosting README</a> is the source of truth for the current commands and storage layout.</p></section>
+    <section className="guide-section"><h2>2. Prepare EmulatorJS and start Docker</h2><pre><code>{`export EMULATORMAYO_ROOT="$PWD/storage"
+./prepare-runtime.sh
+docker compose up -d`}</code></pre><p>The preparation script downloads the official, pinned EmulatorJS 4.2.3 runtime and extracts it with a disposable Python container. It does not download games. The runtime and any games stay outside Git and retain their own licenses.</p><p>Open <code>http://127.0.0.1:8097</code> on the host. The container binds to localhost by default. For access from a trusted LAN, set <code>EMULATORMAYO_BIND</code> to the host’s LAN IP before running Docker Compose. Use that host IP and port in your device’s browser.</p></section>
+    <section className="guide-section"><h2>3. Select a system and a local game file</h2><p>Choose the supported system, select your local game and provide a BIOS file if the selected core needs one. Local selection uses a browser object URL: the file is read by your browser rather than uploaded to an Emulatormayo backend. Emulator runtime assets are fetched from your configured host.</p><p>EmulatorJS provides the emulator, on-screen controls, controller configuration and supported save features. Use the player’s settings to map your controller. Not every system, core or controller works on every device.</p></section>
+    <section className="guide-section"><h2>Keep the player private and back up saves</h2><p>The included player has no login. Keep it on a trusted network or place it behind an authenticated reverse proxy. Use HTTPS for features that need a secure context, including controller APIs in some browsers and threaded cores. The included COOP/COEP headers do not turn plain HTTP into a secure context.</p><p>Saves and save states use EmulatorJS’s browser storage and export controls. Export backups before clearing browser data or moving to another browser or device. The player does not provide cloud save synchronization.</p><p>Emulatormayo is independent of <a href="https://emulatorjs.org/">EmulatorJS</a>; upstream runtime and core licenses apply. No games, BIOS files, keys or third-party ROM sourcing links are included. Use only content you are authorized to access. Downloads and use are at your own risk.</p></section>
+  </GuideLayout>;
+}

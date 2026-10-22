@@ -3,14 +3,14 @@ export const site = {
   "kind": "emulator",
   "url": "https://emulatormayo.quentinmayo.com",
   "tagline": "A little less setup. A lot more play.",
-  "description": "A small self-hosted player for your own EmulatorJS setup. Bring a game file, open your browser and let the emulator do its thing.",
+  "description": "Self-host an EmulatorJS browser player with Docker. Play your own local game files, configure controls and keep runtime assets on your server. Free and open source.",
   "repository": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com",
   "primaryUrl": "#setup",
   "primaryLabel": "Self-host the player",
   "secondaryUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/tree/main/selfhost",
   "secondaryLabel": "Explore the tooling",
-  "status": "OPEN SOURCE \u00b7 SELF-HOSTED PLAYER",
-  "eyebrow": "YOUR GAMES. YOUR LITTLE CORNER OF THE WEB.",
+  "status": "OPEN SOURCE · SELF-HOSTED PLAYER",
+  "eyebrow": "EMULATORJS PLAYER · SELF-HOSTED WITH DOCKER",
   "headline": [
     "A little less setup.",
     "A lot more play."
@@ -91,5 +91,7 @@ export const site = {
   ],
   "closing": "Bring your own adventure.",
   "sisterName": "Rommayo",
-  "sisterUrl": "https://rommayo.quentinmayo.com"
+  "sisterUrl": "https://rommayo.quentinmayo.com",
+  "seoTitle": "Emulatormayo | Self-hosted EmulatorJS Player",
+  "supportUrl": "https://buymeacoffee.com/quentinmayo"
 };
