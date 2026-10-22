@@ -1,6 +1,6 @@
 {
   "name": "emulatormayo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Your local EmulatorJS desktop player. Install, choose your own game, press play.",
   "author": "Quentin Mayo",
@@ -62,7 +62,8 @@
         "dmg"
       ],
       "category": "public.app-category.games",
-      "icon": "assets/icon.png"
+      "icon": "assets/icon.png",
+      "identity": "-"
     },
     "nsis": {
       "oneClick": false,

@@ -2,16 +2,16 @@ Install Emulatormayo, choose a supported system and your own local game, and pre
 
 | Platform | Package |
 | --- | --- |
-| macOS Apple Silicon | `Emulatormayo-0.1.0-mac-arm64.dmg` |
-| macOS Intel | `Emulatormayo-0.1.0-mac-x64.dmg` |
-| Windows x64 | `Emulatormayo-0.1.0-win-x64.exe` |
-| Linux x64 / Steam Deck | `Emulatormayo-0.1.0-linux-x86_64.AppImage` |
+| macOS Apple Silicon | `Emulatormayo-0.1.1-mac-arm64.dmg` |
+| macOS Intel | `Emulatormayo-0.1.1-mac-x64.dmg` |
+| Windows x64 | `Emulatormayo-0.1.1-win-x64.exe` |
+| Linux x64 / Steam Deck | `Emulatormayo-0.1.1-linux-x86_64.AppImage` |
 
 Download the appropriate file from Assets below. Open the DMG or Windows installer; on Linux make the AppImage executable. Steam Deck users can add it as a non-Steam app and use `--deck`. Checksums are in `SHA256SUMS.txt`.
 
 This desktop player includes native file selection, save export dialogs, fullscreen, local browser saves and a leave-game confirmation. Export backups before deleting app data or switching devices. It uses Electron's sandboxed browser engine; Emulatormayo does not provide native emulator binaries or cloud saves.
 
-Public alpha: packages are unsigned and macOS apps are not notarized. Every platform has automated player checks; real gameplay has been tested on macOS Apple Silicon using a C64 homebrew game. Physical Steam Deck, Intel Mac, Windows/Linux hardware, Xbox controllers and other game systems are not universally certified.
+Public alpha: macOS apps use ad-hoc signatures and are not notarized; Windows packages are unsigned. Every platform has automated player checks; real gameplay has been tested on macOS Apple Silicon using a C64 homebrew game. Physical Steam Deck, Intel Mac, Windows/Linux hardware, Xbox controllers and other game systems are not universally certified.
 
 No games, BIOS files or keys are included. Use only content you are authorized to access. No third-party ROM sourcing/download support. Independent of EmulatorJS and Valve.
 
