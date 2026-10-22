@@ -2,9 +2,11 @@ name: Desktop apps
 on:
   pull_request:
     branches: [main]
+    paths: ['desktop/**', 'selfhost/site/**', '.github/workflows/desktop.yml']
   push:
     branches: [main]
     tags: ['desktop-v*']
+    paths: ['desktop/**', 'selfhost/site/**', '.github/workflows/desktop.yml']
   workflow_dispatch:
 permissions:
   contents: read

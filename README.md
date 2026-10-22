@@ -1,14 +1,29 @@
 <p align="center"><img src="public/og.svg" alt="Emulatormayo — Your library, your devices" width="100%"></p>
 
-# Emulatormayo · The website
+# Emulatormayo · Desktop player & website
 
 **[Visit emulatormayo.quentinmayo.com](https://emulatormayo.quentinmayo.com)** for product details, setup and compatibility notes.
 
 A public, login-free Next.js website for Emulatormayo. Dark library-inspired design, original fictional cover art, responsive layouts and an interactive preview. No games, BIOS files, server credentials, analytics or visitor accounts are included.
 
-The optional **[private self-hosted player](selfhost/README.md)** wraps the official pinned EmulatorJS runtime. It is separate from this public product website. Emulatormayo has no native APK or desktop package yet.
+## Download & install
 
-## Run locally
+**No Node.js, npm, Docker or server required for the desktop apps.** Install Emulatormayo, choose a supported system and your own local game file, then press play. The pinned EmulatorJS runtime is included.
+
+| Platform | Download |
+| --- | --- |
+| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-arm64.dmg) |
+| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-x64.dmg) |
+| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-win-x64.exe) |
+| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-linux-x86_64.AppImage) |
+
+[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.1) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
+
+Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users can add it as a non-Steam app with `--deck`. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Physical Steam Deck and controller testing is pending.
+
+Prefer hosting it yourself? The optional **[private self-hosted browser player](selfhost/README.md)** remains available with Docker. It is separate from this public product website. No Android APK is released yet.
+
+## Develop this website locally
 
 ```sh
 npm ci
