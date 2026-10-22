@@ -56,3 +56,15 @@ I need help affording my AI token usage :) If this project makes your setup a li
 The public site includes descriptive page titles, canonical URLs, indexable HTML, PNG social cards, WebSite/Person JSON-LD, a linked [setup guide](https://emulatormayo.quentinmayo.com/getting-started), `robots.txt` and a two-page sitemap. Each page has its own canonical URL and social metadata. Keep titles, descriptions and sitemap entries in sync when adding pages; regenerate `public/og.png` from `public/og.svg` if the social artwork changes.
 
 For indexing diagnostics, verify the production domain in Google Search Console or Bing Webmaster Tools, submit `/sitemap.xml`, and inspect the home and guide URLs. These tools require the site owner's account; publishing metadata does not register the site or guarantee a ranking.
+
+## One-line desktop & Steam Deck setup
+
+In Steam Deck **Desktop Mode**, open Konsole and run:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/securelyprogramming/emulatormayo.quentinmayo.com/main/scripts/install.sh | bash -s -- --steam-deck
+```
+
+For macOS or Linux desktop, use the same command without `-s -- --steam-deck`. [Read the installer](scripts/install.sh) before running it. It verifies the packaged release’s SHA-256 before installing into your account, preserves existing game profiles, and needs no sudo, npm or server. Windows users can use the installer in Downloads above.
+
+In Desktop Mode, open **Steam → Games → Add a Non-Steam Game** and select **Emulatormayo**. Return to **Gaming Mode → Library → Non-Steam**. The installed launcher includes `--deck`; leave Proton/Compatibility disabled. Choose your own local game file in the app and configure gameplay controls through EmulatorJS. Save/export progress before leaving.

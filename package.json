@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
-    "start": "next dev --hostname 127.0.0.1"
+    "start": "next dev --hostname 127.0.0.1",
+    "test:install": "node --test scripts/install.test.cjs"
   },
   "dependencies": {
     "next": "16.4.2",
