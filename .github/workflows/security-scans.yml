@@ -1,0 +1,50 @@
+name: Organization security
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: '18 4 * * 3'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  security:
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: securelyprogramming/centralized-actions-simple/.github/workflows/security-scans-v2.yml@543ff89c2ce6ef4230c9a55654f03ed7831229e4
+    with:
+      languages: "[{\"language\":\"actions\",\"build-mode\":\"none\"},{\"language\":\"javascript-typescript\",\"build-mode\":\"none\"}]"
+      codeql_note: ""
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm run build
+  deploy:
+    needs: [build, security]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.COOLIFY_APPLICATION_UUID != '' }}
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Deploy the verified revision with Coolify
+        env:
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+          APPLICATION_UUID: ${{ vars.COOLIFY_APPLICATION_UUID }}
+        run: |
+          curl --fail-with-body --silent --show-error --retry 2 \
+            --header "Authorization: Bearer $COOLIFY_TOKEN" \
+            "https://coolify4.programmingsecurely.com/api/v1/deploy?uuid=$APPLICATION_UUID&force=false"

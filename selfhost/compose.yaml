@@ -1,0 +1,16 @@
+services:
+  player:
+    image: nginxinc/nginx-unprivileged:stable-alpine
+    ports:
+      - "${EMULATORMAYO_BIND:-127.0.0.1}:${EMULATORMAYO_PORT:-8097}:8080"
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${EMULATORMAYO_ROOT:-./storage}/runtime:/runtime:ro
+      - ${EMULATORMAYO_ROOT:-./storage}/roms:/roms:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
