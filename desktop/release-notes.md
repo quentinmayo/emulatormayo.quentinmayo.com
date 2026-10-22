@@ -1,11 +1,13 @@
+Steam Deck update: original Steam library art and app icons, a visible Quit app control, save-before-exit guidance, and clickable EmulatorJS toolbar controls during Deck gameplay. A labeled action menu supports touch, F10 and a standard controller (L3 + R3, D-pad, A/B). The artwork helper preserves existing shortcut IDs and controls and requires Steam to be closed.
+
 Install Emulatormayo, choose a supported system and your own local game, and press play. **No Node.js, npm, Docker or server setup required.** The official EmulatorJS 4.2.3 runtime is included in every package.
 
 | Platform | Package |
 | --- | --- |
-| macOS Apple Silicon | `Emulatormayo-0.1.1-mac-arm64.dmg` |
-| macOS Intel | `Emulatormayo-0.1.1-mac-x64.dmg` |
-| Windows x64 | `Emulatormayo-0.1.1-win-x64.exe` |
-| Linux x64 / Steam Deck | `Emulatormayo-0.1.1-linux-x86_64.AppImage` |
+| macOS Apple Silicon | `Emulatormayo-0.1.2-mac-arm64.dmg` |
+| macOS Intel | `Emulatormayo-0.1.2-mac-x64.dmg` |
+| Windows x64 | `Emulatormayo-0.1.2-win-x64.exe` |
+| Linux x64 / Steam Deck | `Emulatormayo-0.1.2-linux-x86_64.AppImage` |
 
 Download the appropriate file from Assets below. Open the DMG or Windows installer; on Linux make the AppImage executable. Steam Deck users can add it as a non-Steam app and use `--deck`. Checksums are in `SHA256SUMS.txt`.
 

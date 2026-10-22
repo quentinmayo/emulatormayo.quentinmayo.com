@@ -1,13 +1,20 @@
 'use strict';
-const { app, BrowserWindow, protocol, net, session, dialog, shell, Menu } = require('electron');
+const { app, BrowserWindow, protocol, net, session, dialog, shell, Menu, ipcMain } = require('electron');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { resolveAsset, externalLink } = require('./protocol-policy.cjs');
 
 protocol.registerSchemesAsPrivileged([{ scheme: 'emulatormayo', privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true } }]);
 if (process.env.EMULATORMAYO_USER_DATA_DIRECTORY) app.setPath('userData', process.env.EMULATORMAYO_USER_DATA_DIRECTORY);
+const {playerAction}=require('./player-actions.cjs');
 const home = 'emulatormayo://player/index.html';
-let window;
+let window, quitting = false;
+const deck = process.argv.includes('--deck');
+async function quitApp() {
+  const choice = await dialog.showMessageBox(window, { type: 'question', message: 'Quit Emulatormayo?', detail: 'Save or export your progress in the player first.', buttons: ['Stay', 'Quit app'], defaultId: 0, cancelId: 0 });
+  if (choice.response !== 1) return;
+  quitting = true; app.quit();
+}
 
 async function openExternal(address) {
   if (externalLink(address)) await shell.openExternal(address);
@@ -15,11 +22,12 @@ async function openExternal(address) {
 
 function createWindow() {
   window = new BrowserWindow({ width: 1200, height: 900, minWidth: 480, minHeight: 600, title: 'Emulatormayo', backgroundColor: '#0d1513', icon: path.join(__dirname, 'assets/icon.png'),
-    webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, allowRunningInsecureContent: false } });
+    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, allowRunningInsecureContent: false } });
   window.webContents.setWindowOpenHandler(({ url }) => { void openExternal(url); return { action: 'deny' }; });
   window.webContents.on('will-navigate', (event, url) => { if (url !== home) { event.preventDefault(); void openExternal(url); } });
   window.webContents.on('will-redirect', event => event.preventDefault());
   window.webContents.on('will-prevent-unload', event => {
+    if (quitting) { event.preventDefault(); return; }
     const choice = dialog.showMessageBoxSync(window, { type: 'question', message: 'Leave this game?', detail: 'Save or export your progress in the player before leaving.', buttons: ['Stay', 'Leave game'], defaultId: 0, cancelId: 0 });
     if (choice === 1) event.preventDefault();
   });
@@ -28,11 +36,27 @@ function createWindow() {
   });
   window.webContents.on('render-process-gone', () => { dialog.showErrorBox('The player stopped', 'Reopen Emulatormayo. Export regular save backups from the player to protect your progress.'); });
   window.loadURL(home);
-  if (process.argv.includes('--deck')) window.setFullScreen(true);
+  if (deck) window.setFullScreen(true);
   window.on('closed', () => { window = null; });
 }
 
 app.whenReady().then(() => {
+  ipcMain.handle('emulatormayo:controls', async (event, command) => {
+    if (event.sender !== window?.webContents || event.senderFrame?.url !== home) throw new Error('Untrusted command source.');
+    if (command?.type === 'init') return { deck };
+    if (command?.type === 'quit') return quitApp();
+    if (command?.type === 'fullscreen') { window.setFullScreen(!window.isFullScreen()); return; }
+    if (command?.type === 'action') {
+      const script=playerAction(command.action);
+      if (['loadState','loadSavFiles','restart'].includes(command.action)) {
+        const choice=await dialog.showMessageBox(window,{type:'question',message:'Replace current game progress?',detail:'Save or export first. This action may replace your current progress.',buttons:['Cancel','Continue'],defaultId:0,cancelId:0});
+        if(choice.response!==1) return false;
+      }
+      if(!await window.webContents.executeJavaScript(script,true)) throw new Error('Start a supported game first. This control must be enabled by the player.');
+      return true;
+    }
+    throw new Error('Unknown command.');
+  });
   const playerRoot = path.join(__dirname, 'player');
   const runtimeRoot = app.isPackaged ? path.join(process.resourcesPath, 'runtime') : path.join(__dirname, 'runtime');
   protocol.handle('emulatormayo', async request => {
@@ -54,8 +78,8 @@ app.whenReady().then(() => {
   });
   Menu.setApplicationMenu(Menu.buildFromTemplate([
     ...(process.platform === 'darwin' ? [{ role: 'appMenu' }] : []),
-    { label: 'File', submenu: [{ label: 'Choose another game', click: () => window?.webContents.reload() }, { role: 'quit' }] },
-    { label: 'View', submenu: [{ role: 'togglefullscreen' }, { role: 'resetZoom' }, { role: 'zoomIn' }, { role: 'zoomOut' }] },
+    { label: 'File', submenu: [{ label: 'Choose another game', click: () => window?.webContents.reload() }, { label: 'Quit Emulatormayo', accelerator: 'CmdOrCtrl+Q', click: quitApp }] },
+    { label: 'View', submenu: [{ label:'Game controls (F10)', click:()=>window?.webContents.executeJavaScript('window.togglePlayerControls?.()') }, { role: 'togglefullscreen' }, { role: 'resetZoom' }, { role: 'zoomIn' }, { role: 'zoomOut' }] },
     { label: 'Help', submenu: [{ label: 'Setup & compatibility', click: () => openExternal('https://emulatormayo.quentinmayo.com/getting-started') }, { label: 'EmulatorJS source & licenses', click: () => openExternal('https://github.com/EmulatorJS/EmulatorJS/tree/v4.2.3') }, { label: 'Buy the developers a coffee', click: () => openExternal('https://buymeacoffee.com/quentinmayo') }] },
   ]));
   createWindow();

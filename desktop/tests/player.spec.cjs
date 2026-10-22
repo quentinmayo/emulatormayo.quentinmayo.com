@@ -44,3 +44,18 @@ test('save exports reach native download handling', async () => {
   await expect.poll(() => fs.existsSync(output)).toBe(true);
   expect(fs.readFileSync(output, 'utf8')).toBe('save fixture');
 });
+
+test('Quit app can be cancelled and confirmed without clearing saves',async()=>{
+ await expect(page.locator('#quit')).toBeVisible();
+ await app.evaluate(({dialog})=>{dialog.showMessageBox=async()=>({response:0});});
+ await page.locator('#quit').click();await expect(page.locator('#gameFile')).toBeVisible();
+ await app.evaluate(({dialog})=>{dialog.showMessageBox=async()=>({response:1});});
+ const appProcess=app.process(); const closed=app.waitForEvent('close');await page.locator('#quit').click({noWaitAfter:true}).catch(error=>{if(!/closed/.test(error.message))throw error;});await closed;await expect.poll(()=>appProcess.exitCode).toBe(0);
+});
+test('player toolbar forwards existing save hooks, refuses unavailable actions, and opens with F10',async()=>{
+ await page.keyboard.press('F10');await expect(page.locator('#player-actions')).toBeVisible();
+ await page.locator('[data-player-action="saveState"]').click();await expect(page.locator('#player-action-status')).toContainText('Start a supported game');
+ await page.evaluate(()=>{window.actions=[];const b=document.createElement('button');b.onclick=()=>window.actions.push('save');document.body.append(b);window.EJS_emulator={started:true,elements:{bottomBar:{saveState:[b]}}};});
+ await page.locator('[data-player-action="saveState"]').click();expect(await page.evaluate(()=>window.actions)).toEqual(['save']);
+ await page.keyboard.press('Escape');await expect(page.locator('#player-actions')).toBeHidden();
+});

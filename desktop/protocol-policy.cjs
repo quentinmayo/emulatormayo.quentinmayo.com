@@ -9,7 +9,7 @@ function resolveAsset(address, method, playerRoot, runtimeRoot) {
   if (url.protocol !== 'emulatormayo:' || url.host !== 'player' || url.username || url.password || /[\\\0:]/.test(pathname)) return null;
   let root, relative;
   if (pathname.startsWith('/data/')) { root = path.join(runtimeRoot, 'data'); relative = pathname.slice('/data/'.length); }
-  else if (['/', '/index.html', '/style.css', '/player.js'].includes(pathname)) { root = playerRoot; relative = pathname === '/' ? 'index.html' : pathname.slice(1); }
+  else if (['/', '/index.html', '/style.css', '/player.js', '/touch-controls.js'].includes(pathname)) { root = playerRoot; relative = pathname === '/' ? 'index.html' : pathname.slice(1); }
   else return null;
   const target = path.resolve(root, relative);
   const within = path.relative(root, target);

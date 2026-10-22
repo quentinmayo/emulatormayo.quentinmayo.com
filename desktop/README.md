@@ -28,3 +28,11 @@ The preparation step verifies the upstream archive's pinned SHA-256, then copies
 GitHub Actions tests Linux, Windows, macOS arm64 and macOS x64. A `desktop-v<version>` tag builds each installer and publishes all packages with `SHA256SUMS.txt` after every platform passes. Keep the tag version aligned with `desktop/package.json`. Releases remain public alphas while cross-device compatibility is being tested.
 
 See [third-party notices](THIRD-PARTY-NOTICES.md), the included runtime license, upstream source and core metadata. Emulatormayo is independent of EmulatorJS and Valve. Use only content you are authorized to access; downloads and use are at your own risk.
+
+## Steam artwork, remembered sessions and exit controls
+
+The Deck installer includes original icons, portrait/landscape covers, hero and logo art. For Steam to retain shortcut changes, fully exit Steam in Desktop Mode (**Steam → Exit**), then run `~/.local/bin/emulatormayo-steam-artwork`. Reopen Steam afterward. The helper adds the shortcut if missing, preserves existing app IDs and controller settings, and backs up changed shortcut/art files beside the originals with a `.mayo-backup-...` suffix. It refuses to edit shortcuts while Steam is running.
+
+During Deck gameplay the original EmulatorJS toolbar stays visible and clickable. The separate bottom bar has navigation, Fullscreen and **Quit app**. **Game controls** offers labeled shortcuts to the existing player actions. Open it with touch, **F10**, or **L3 + R3** on a standard gamepad; use D-pad to move, A to select, B to close. Save/load/import/export still use the player’s own handlers. Unsupported engines show a message instead of pretending an action succeeded.
+
+Save/export before leaving. **Quit app** asks before closing; alternatively press **STEAM → Exit game** and confirm. Quitting does not save automatically or log you out. If the player itself is in HTML fullscreen, its toolbar remains available; use Steam’s system menu to exit the app.
