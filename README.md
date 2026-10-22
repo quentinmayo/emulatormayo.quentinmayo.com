@@ -33,8 +33,8 @@ Physical hardware checks recorded October 22, 2026. These are specific smoke tes
 | Device | Environment | Verified | Still to check |
 | --- | --- | --- | --- |
 | Samsung Galaxy S24 Ultra | Android 17 | Signed APK; native local library; C64 homebrew boot; touch controls and player toolbar visible. | Physical external-controller gameplay not verified. |
-| Retroid Pocket 5 | Android 13 | Signed APK installed on the handheld. | Local import, gameplay and physical controls are still under test. |
-| Steam Deck | SteamOS, docked 1920 × 1080 | AppImage installation and Desktop Mode launch. | Gaming Mode gameplay and physical controls remain under test. |
+| Retroid Pocket 5 | Android 13 | Signed APK; native landscape library; local C64 import and core boot; built-in controller detected. | Physical gameplay bindings still need per-core checks. |
+| Steam Deck | SteamOS, docked 1920 × 1080 | AppImage 0.1.2 installation; Desktop Mode C64 core boot; clickable toolbar pause/resume; confirmed Quit dialog; Steam artwork installed. | Gaming Mode gameplay and physical controls remain under test. |
 | MacBook Pro (Apple M4 Pro) | macOS, Apple Silicon | C64 core boot; visible player toolbar; pause/resume; save-state export. | Other emulator cores and systems are not certified. |
 
 [Setup and current device notes](https://emulatormayo.quentinmayo.com/getting-started#tested-devices).
@@ -85,3 +85,7 @@ In Desktop Mode, open **Steam → Games → Add a Non-Steam Game** and select **
 Follow the [illustrated Steam Deck guide](https://emulatormayo.quentinmayo.com/steam-deck) for screenshots, controls and troubleshooting.
 
 ![Installed launchers in Steam](public/screenshots/steam-deck-add-to-steam.png)
+
+![Native Android library on Retroid Pocket 5 before import](public/screenshots/retroid-native-library.png)
+
+Focused [security review and limits](docs/security-review-2026-10-22.md).
