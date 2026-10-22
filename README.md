@@ -1,6 +1,6 @@
 <p align="center"><img src="public/og.svg" alt="Emulatormayo — Your library, your devices" width="100%"></p>
 
-# Emulatormayo · Desktop player & website
+# Emulatormayo · Native Android, desktop player & website
 
 **[Visit emulatormayo.quentinmayo.com](https://emulatormayo.quentinmayo.com)** for product details, setup and compatibility notes.
 
@@ -8,10 +8,11 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 ## Download & install
 
-**No Node.js, npm, Docker or server required for the desktop apps.** Install Emulatormayo, choose a supported system and your own local game file, then press play. The pinned EmulatorJS runtime is included.
+**No Node.js, npm, Docker or server required for the Android and desktop apps.** Install Emulatormayo, choose a supported system and your own local game file, then press play. The pinned EmulatorJS runtime is included.
 
 | Platform | Download |
 | --- | --- |
+| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.0/Emulatormayo-0.2.0-android.apk) |
 | macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-arm64.dmg) |
 | macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-x64.dmg) |
 | Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-win-x64.exe) |
@@ -19,9 +20,11 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 [Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.1) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
 
+On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.0).
+
 Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users can add it as a non-Steam app with `--deck`. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Physical Steam Deck and controller testing is pending.
 
-Prefer hosting it yourself? The optional **[private self-hosted browser player](selfhost/README.md)** remains available with Docker. It is separate from this public product website. No Android APK is released yet.
+Prefer hosting it yourself? The optional **[private self-hosted browser player](selfhost/README.md)** remains available with Docker. It is separate from this public product website. The [native Android APK](android/README.md) includes its runtime and needs no login or server.
 
 ## Develop this website locally
 

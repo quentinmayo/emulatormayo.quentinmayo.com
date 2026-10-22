@@ -3,30 +3,31 @@ export const site = {
   "kind": "emulator",
   "url": "https://emulatormayo.quentinmayo.com",
   "tagline": "A little less setup. A lot more play.",
-  "description": "Install an EmulatorJS desktop player for macOS, Windows or Linux. Play your own local game files with the runtime included. Free, open source, no server required.",
+  "description": "Play your own local games on Android, macOS, Windows and Linux with EmulatorJS included. Native Android library, controller settings, no account or server required.",
   "repository": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com",
   "primaryUrl": "/#downloads",
   "primaryLabel": "Download Emulatormayo",
   "secondaryUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/tree/main/selfhost",
   "secondaryLabel": "Self-host instead",
-  "status": "DESKTOP ALPHA · AVAILABLE NOW",
-  "eyebrow": "EMULATORJS PLAYER · MACOS, WINDOWS & LINUX",
+  "status": "ANDROID + DESKTOP ALPHA \u00b7 AVAILABLE NOW",
+  "eyebrow": "EMULATORJS PLAYER \u00b7 ANDROID & DESKTOP",
   "headline": [
     "A little less setup.",
     "A lot more play."
   ],
   "heroNote": "Free and open source. No account. No bundled games.",
   "devices": [
+    "ANDROID APK",
     "MACOS",
     "WINDOWS",
     "LINUX / STEAM DECK"
   ],
   "featureTitle": "Small by design. Yours by default.",
-  "featureIntro": "Install a desktop player with the emulator runtime included, or keep the browser player on a server you control.",
+  "featureIntro": "Install a local Android or desktop player with the emulator runtime included, or self-host the browser player.",
   "features": [
     {
-      "title": "Install. Pick a file. Play.",
-      "body": "Choose a macOS, Windows or Linux installer. The EmulatorJS runtime is bundled; select your own local game and a supported system without setting up a server."
+      "title": "A native Android library.",
+      "body": "Browse imported games, search, favorite and pick up recent games in native, Steam-inspired Android screens. Tune menu navigation for handhelds and USB or Bluetooth controllers."
     },
     {
       "title": "Or give it a server.",
@@ -38,9 +39,9 @@ export const site = {
     }
   ],
   "bandTitle": "The engine you know.\nA place to make it yours.",
-  "bandBody": "EmulatorJS provides browser emulation powered by libretro cores. Emulatormayo packages a local desktop player around that engine, with a system selector, native file selection, save exports and an optional self-hosted browser setup.",
+  "bandBody": "EmulatorJS provides emulation powered by libretro cores. Emulatormayo adds a native Android library and controller settings, a desktop player, native file selection and save exports, plus an optional self-hosted browser setup.",
   "capabilities": [
-    "Install for Mac, Windows or Linux",
+    "Install for Android, Mac, Windows or Linux",
     "Choose your own local game file",
     "Use EmulatorJS controls & saves",
     "Keep an optional self-hosted setup"
@@ -48,29 +49,29 @@ export const site = {
   "upstreamName": "EmulatorJS",
   "upstreamUrl": "https://emulatorjs.org/",
   "setupTitle": "Install. Choose a game. Press play.",
-  "setupIntro": "Desktop installers include the pinned EmulatorJS runtime. You do not need Node.js, npm, Docker or a server. The self-hosted browser bundle remains available.",
+  "setupIntro": "Android and desktop apps include the pinned EmulatorJS runtime. No Node.js, npm, Docker, server or login is required.",
   "steps": [
     {
-      "title": "Install your desktop app.",
-      "body": "Download the Mac DMG, Windows installer or Linux AppImage. Choose Apple Silicon or Intel to match your Mac. The emulator runtime is included."
+      "title": "Install for your device.",
+      "body": "Download the signed Android APK, Mac DMG, Windows installer or Linux AppImage. The emulator runtime is included."
     },
     {
       "title": "Bring your own game.",
-      "body": "Select a supported system, choose your local game file and provide a BIOS file if the core needs one. No account or game upload is required."
+      "body": "On Android, tap Import and select a system and your own game files. Private copies stay on your device. Desktop players open your selected local file. Some cores require your own BIOS."
     },
     {
       "title": "Save your next adventure.",
       "body": "Map controls through EmulatorJS and use its save/export controls. Saves stay in this app on this device; export backups before moving devices or clearing app data."
     }
   ],
-  "installEyebrow": "MACOS / WINDOWS / LINUX",
+  "installEyebrow": "ANDROID / MACOS / WINDOWS / LINUX",
   "installTitle": "Ready when your next game is.",
   "installBody": "Download the installer for your device. Release notes and checksums are on GitHub.",
-  "compatibility": "Desktop apps use Electron with the bundled EmulatorJS runtime. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Browser, core, BIOS and device compatibility vary. No Android APK is released yet; the self-hosted browser player remains available. Physical Steam Deck and controller testing is pending.",
+  "compatibility": "Android 10+ uses native library, import, recent games and controller screens; gameplay uses bundled EmulatorJS in Android WebView. Desktop apps use Electron. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Core, BIOS and device support vary. Physical Steam Deck and Xbox/retro-controller gameplay testing is pending.",
   "faq": [
     {
       "question": "Is this the public game player?",
-      "answer": "This is the public project site. Download a desktop app to play your local files, or use the separate player you self-host. The public website does not serve a game library."
+      "answer": "This is the public project site. Download the local Android or desktop app, or use the player you self-host. This website does not serve a game library."
     },
     {
       "question": "Is this an official EmulatorJS project?",
@@ -78,11 +79,11 @@ export const site = {
     },
     {
       "question": "Does selecting a local file upload it?",
-      "answer": "Desktop and self-hosted players use a browser object URL for local file selection. The game is read by your device rather than uploaded to an Emulatormayo backend. Desktop packages include their runtime assets."
+      "answer": "No. Android imports a private device-local copy without changing the original. Desktop and self-hosted players read the chosen file through a browser object URL. Apps include the runtime; there is no Emulatormayo upload backend."
     },
     {
       "question": "Can I use a gamepad or save my progress?",
-      "answer": "Those features are provided by EmulatorJS and depend on its core, browser permissions and configuration. They are not a promise of every controller or platform working on every device."
+      "answer": "Android provides native menu navigation, A/B swap, dead-zone, landscape and controller-check settings. Gameplay mapping and supported saves are provided by EmulatorJS. USB and Bluetooth controllers use Android input; every controller and core is not yet certified."
     },
     {
       "question": "Where do I get games?",
@@ -92,30 +93,35 @@ export const site = {
   "closing": "Bring your own adventure.",
   "sisterName": "Rommayo",
   "sisterUrl": "https://rommayo.quentinmayo.com",
-  "seoTitle": "Emulatormayo | EmulatorJS for macOS, Windows & Linux",
+  "seoTitle": "Emulatormayo | Android APK & EmulatorJS Desktop Apps",
   "supportUrl": "https://buymeacoffee.com/quentinmayo",
-  "downloadVersion": "v0.1.1 · Desktop alpha",
+  "downloadVersion": "Android v0.2.0 \u00b7 Desktop v0.1.1",
   "downloadIntro": "The EmulatorJS runtime is included. Install, choose your own game file and play. No Node.js, npm, Docker or server required.",
   "releaseUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.1",
   "downloads": [
     {
-      "label": "macOS · Apple Silicon",
-      "detail": "M-series Macs · DMG",
+      "label": "Android",
+      "detail": "Android 10+ \u00b7 signed APK \u00b7 native library",
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.0/Emulatormayo-0.2.0-android.apk"
+    },
+    {
+      "label": "macOS \u00b7 Apple Silicon",
+      "detail": "M-series Macs \u00b7 DMG",
       "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-arm64.dmg"
     },
     {
-      "label": "macOS · Intel",
-      "detail": "Intel Macs · DMG",
+      "label": "macOS \u00b7 Intel",
+      "detail": "Intel Macs \u00b7 DMG",
       "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-mac-x64.dmg"
     },
     {
       "label": "Windows",
-      "detail": "x64 · installer",
+      "detail": "x64 \u00b7 installer",
       "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-win-x64.exe"
     },
     {
       "label": "Linux / Steam Deck",
-      "detail": "x64 · AppImage",
+      "detail": "x64 \u00b7 AppImage",
       "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.1/Emulatormayo-0.1.1-linux-x86_64.AppImage"
     }
   ],

@@ -18,3 +18,12 @@ out/
 /desktop/release/
 /desktop/test-results/
 /desktop/playwright-report/
+
+# Android build outputs and local SDK/signing files.
+/android/.gradle/
+/android/.kotlin/
+**/build/
+local.properties
+*.p12
+*.jks
+*.keystore
