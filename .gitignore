@@ -6,3 +6,7 @@ out/
 !.env.example
 .DS_Store
 .local/
+
+# Generated private runtime and game storage.
+/selfhost/storage/
+/selfhost/.env

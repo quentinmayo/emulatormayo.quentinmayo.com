@@ -25,6 +25,6 @@ The repository's workflow calls the organization's pinned centralized security w
 
 ## Security & responsibility
 
-Centralized scans include CodeQL, secret detection and dependency/container analysis as provided by `securelyprogramming/centralized-actions-simple`. A configured workflow is not proof that a particular scan has passed; inspect the latest Actions results and Security tab.
+Centralized scans include CodeQL plus centralized secret detection, dependency, infrastructure and workflow analysis as provided by `securelyprogramming/security-workflows`. A configured workflow is not proof that a particular scan has passed; inspect the latest Actions results and Security tab.
 
 Use only content you are authorized to access. Downloads and use are at your own risk. This independent companion is not affiliated with upstream projects or Valve. No third-party ROM sourcing is supported. Website code is MIT licensed; upstream applications, runtimes and emulator cores retain their own licenses.
