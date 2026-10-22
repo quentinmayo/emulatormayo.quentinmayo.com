@@ -1,3 +1,4 @@
+# Managed by centralized-actions-simple: public website security
 name: Organization security
 on:
   push:
@@ -5,7 +6,7 @@ on:
   pull_request:
     branches: ["main"]
   schedule:
-    - cron: '18 4 * * 3'
+    - cron: '23 4 * * 3'
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +25,7 @@ jobs:
       enable_vuln: true
       enable_config: true
       enable_actions: true
+
   codeql:
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
@@ -50,6 +52,7 @@ jobs:
       - uses: github/codeql-action/analyze@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2
         with:
           category: /language:${{ matrix.language }}
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -63,6 +66,7 @@ jobs:
       - run: npm ci
       - run: npm audit --audit-level=high
       - run: npm run build
+
   security-results:
     needs: security
     runs-on: ubuntu-latest
@@ -84,6 +88,7 @@ jobs:
         with:
           sarif_file: security-reports/trivy-misconfig.sarif
           category: trivy-misconfiguration
+
   security-summary:
     name: security / Security summary
     needs: [security, codeql, security-results]
@@ -100,6 +105,7 @@ jobs:
           results = json.loads(os.environ['RESULTS'])
           sys.exit(0 if all(job['result'] == 'success' for job in results.values()) else 1)
           PYTHON
+
   deploy:
     needs: [build, security-summary]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.COOLIFY_APPLICATION_UUID != '' }}
@@ -111,6 +117,6 @@ jobs:
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
           APPLICATION_UUID: ${{ vars.COOLIFY_APPLICATION_UUID }}
         run: |
-          curl --fail-with-body --silent --show-error --retry 2 \
+          curl --request POST --fail-with-body --silent --show-error --retry 2 \
             --header "Authorization: Bearer $COOLIFY_TOKEN" \
             "https://coolify4.programmingsecurely.com/api/v1/deploy?uuid=$APPLICATION_UUID&force=false"
