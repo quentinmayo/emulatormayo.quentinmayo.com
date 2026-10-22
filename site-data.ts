@@ -95,14 +95,14 @@ export const site = {
   "sisterUrl": "https://rommayo.quentinmayo.com",
   "seoTitle": "Emulatormayo | Android APK & EmulatorJS Desktop Apps",
   "supportUrl": "https://buymeacoffee.com/quentinmayo",
-  "downloadVersion": "Android v0.2.0 \u00b7 Desktop v0.1.2",
+  "downloadVersion": "Android v0.2.1 \u00b7 Desktop v0.1.2",
   "downloadIntro": "The EmulatorJS runtime is included. Install, choose your own game file and play. No Node.js, npm, Docker or server required.",
   "releaseUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.2",
   "downloads": [
     {
       "label": "Android",
       "detail": "Android 10+ \u00b7 signed APK \u00b7 native library",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.0/Emulatormayo-0.2.0-android.apk"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk"
     },
     {
       "label": "macOS \u00b7 Apple Silicon",

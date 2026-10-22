@@ -2,7 +2,7 @@
 
 A native, Steam-inspired local game library for Android phones, tablets and controller handhelds. **No server or login.** Library, imports, search, favorites, recent games and controller settings are Android Views. Only gameplay uses a WebView with bundled EmulatorJS 4.2.3.
 
-[Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.0/Emulatormayo-0.2.0-android.apk) · [Checksums & release notes](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.0) · [Setup guide](https://emulatormayo.quentinmayo.com/getting-started)
+[Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk) · [Checksums & release notes](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.1) · [Setup guide](https://emulatormayo.quentinmayo.com/getting-started)
 
 ## Play
 

@@ -12,7 +12,7 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 | Platform | Download |
 | --- | --- |
-| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.0/Emulatormayo-0.2.0-android.apk) |
+| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk) |
 | macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-mac-arm64.dmg) |
 | macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-mac-x64.dmg) |
 | Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-win-x64.exe) |
@@ -20,7 +20,7 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 [Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.2) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
 
-On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.0).
+On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.1).
 
 Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users should follow the [illustrated guide](https://emulatormayo.quentinmayo.com/steam-deck) for the generated launcher or full manual launch options. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Installation and Desktop Mode launch have been tested on a real Steam Deck; see the illustrated Steam Deck guide for the current gameplay and controller test status.
 
