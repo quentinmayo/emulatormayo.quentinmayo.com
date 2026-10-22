@@ -21,7 +21,7 @@ async function openExternal(address) {
 }
 
 function createWindow() {
-  window = new BrowserWindow({ width: 1200, height: 900, minWidth: 480, minHeight: 600, title: 'Emulatormayo', backgroundColor: '#0d1513', icon: path.join(__dirname, 'assets/icon.png'),
+  window = new BrowserWindow({ width: 1200, height: 900, minWidth: 480, minHeight: 600, title: 'Emulatormayo', backgroundColor: '#091610', icon: path.join(__dirname, 'assets/icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, allowRunningInsecureContent: false } });
   window.webContents.setWindowOpenHandler(({ url }) => { void openExternal(url); return { action: 'deny' }; });
   window.webContents.on('will-navigate', (event, url) => { if (url !== home) { event.preventDefault(); void openExternal(url); } });

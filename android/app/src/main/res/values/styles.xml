@@ -1,5 +1,8 @@
 <resources><style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
     <item name="android:fontFamily">sans</item><item name="android:windowLightStatusBar">false</item>
-    <item name="android:statusBarColor">#0E151E</item><item name="android:navigationBarColor">#0E151E</item>
-    <item name="android:colorAccent">#67C4FF</item><item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    <item name="android:statusBarColor">@color/mayo_background</item><item name="android:navigationBarColor">@color/mayo_background</item>
+    <item name="android:windowBackground">@color/mayo_background</item><item name="android:colorBackground">@color/mayo_background</item>
+    <item name="android:textColorPrimary">@color/mayo_text</item><item name="android:textColorSecondary">@color/mayo_muted</item>
+    <item name="android:colorButtonNormal">@color/mayo_panel</item><item name="android:colorControlActivated">@color/mayo_accent</item>
+    <item name="android:colorAccent">@color/mayo_accent</item><item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
 </style></resources>

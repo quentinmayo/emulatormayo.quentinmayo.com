@@ -1,0 +1,9 @@
+<resources>
+    <color name="mayo_background">#091610</color>
+    <color name="mayo_panel">#11271D</color>
+    <color name="mayo_focus">#1D4130</color>
+    <color name="mayo_rail">#0C1D15</color>
+    <color name="mayo_text">#ECF8F0</color>
+    <color name="mayo_muted">#A4C3B1</color>
+    <color name="mayo_accent">#67E8A5</color>
+</resources>

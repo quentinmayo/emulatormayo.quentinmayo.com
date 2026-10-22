@@ -1,6 +1,6 @@
 import { site } from "../site-data";
 import Preview from "../components/Preview";
-function Mark({small=false}:{small?:boolean}) { return <span className={`brand ${small?"brand-small":""}`}><svg aria-hidden="true" viewBox="0 0 32 38"><path d="M4 1h24v36H4z" fill="currentColor"/><path d="M8 6h16v3H8zm5 8 10 6-10 6zm-3 19h12v4H10z" fill="#0b1017"/></svg><span>{site.name.toLowerCase()}<b>.</b></span></span>; }
+function Mark({small=false}:{small?:boolean}) { return <span className={`brand ${small?"brand-small":""}`}><svg aria-hidden="true" viewBox="0 0 32 38"><path d="M4 1h24v36H4z" fill="currentColor"/><path d="M8 6h16v3H8zm5 8 10 6-10 6zm-3 19h12v4H10z" fill="var(--bg)"/></svg><span>{site.name.toLowerCase()}<b>.</b></span></span>; }
 function Arrow(){return <span aria-hidden="true">↗</span>}
 export default function Home(){const emulator=site.kind==="emulator";return <>
  <a className="skip-link" href="#main">Skip to content</a>

@@ -8,8 +8,9 @@ if(!/^[a-f0-9-]{36}$/.test(id||'')||!systems.includes(core)){
  window.EJS_player='#game';window.EJS_core=core;
  window.EJS_gameUrl='/games/'+id+'/'+encodeURIComponent(name||'game');window.EJS_gameName=name||'game';window.EJS_gameID=parseInt(id.replaceAll('-','').slice(0,8),16);
  window.EJS_pathtodata='/data/';window.EJS_startOnLoaded=false;
+ window.EJS_color='#26734d';window.EJS_backgroundColor='#091610';
  if(parameters.get('bios')==='1')window.EJS_biosUrl='/bios/'+id+'/bios.bin';
- window.EJS_onGameStart=()=>{document.getElementById('loading').hidden=true;};
+ window.EJS_onGameStart=()=>{window.emulatormayoEnableGamepads();document.getElementById('loading').hidden=true;};
  const loader=document.createElement('script');loader.src='/data/loader.js';
  loader.onload=()=>{document.getElementById('loading').hidden=true;};
  loader.onerror=()=>{document.getElementById('loading').textContent='The included emulator could not load. Return to the library, then reinstall the official APK if it happens again.';};

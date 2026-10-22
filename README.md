@@ -33,7 +33,7 @@ Physical hardware checks recorded October 22, 2026. These are specific smoke tes
 | Device | Environment | Verified | Still to check |
 | --- | --- | --- | --- |
 | Samsung Galaxy S24 Ultra | Android 17 | Signed APK; native local library; C64 homebrew boot; touch controls and player toolbar visible. | Physical external-controller gameplay not verified. |
-| Retroid Pocket 5 | Android 13 | Signed APK; native landscape library; local C64 import and core boot; built-in controller detected. | Physical gameplay bindings still need per-core checks. |
+| Retroid Pocket 5 | Android 13 | Signed APK; native landscape library; local C64 import and core boot; owner confirmed D-pad, left-stick and A/B native menu navigation. | Gameplay forwarding passes device automation; physical gameplay direction retest pending. |
 | Steam Deck | SteamOS, docked 1920 × 1080 | AppImage 0.1.2 installation; Desktop Mode C64 core boot; clickable toolbar pause/resume; confirmed Quit dialog; Steam artwork installed. | Gaming Mode gameplay and physical controls remain under test. |
 | MacBook Pro (Apple M4 Pro) | macOS, Apple Silicon | C64 core boot; visible player toolbar; pause/resume; save-state export. | Other emulator cores and systems are not certified. |
 
@@ -86,6 +86,10 @@ Follow the [illustrated Steam Deck guide](https://emulatormayo.quentinmayo.com/s
 
 ![Installed launchers in Steam](public/screenshots/steam-deck-add-to-steam.png)
 
-![Native Android library on Retroid Pocket 5 before import](public/screenshots/retroid-native-library.png)
+<p align="center"><img src="public/screenshots/android-green-library.png" alt="Dark green native Android library on Galaxy S24 Ultra with a mint focus outline and generated C64 placeholder" width="360"></p>
+
+The green Android library shown on a Galaxy S24 Ultra. The tile is an app-generated system placeholder, with no game artwork.
 
 Focused [security review and limits](docs/security-review-2026-10-22.md).
+
+Android contributors: [controller menu validation](docs/android-controller-tests.md) covers focus movement and the physical handheld checklist.

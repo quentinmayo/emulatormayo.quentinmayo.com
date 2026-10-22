@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { site } from "../site-data";
 import JsonLd from "../components/JsonLd";
 import { pageMetadata, siteIdentity } from "../seo";
 import "./globals.css";
+export const viewport: Viewport = { themeColor: "#091610", colorScheme: "dark" };
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   ...pageMetadata(site.seoTitle, site.description),

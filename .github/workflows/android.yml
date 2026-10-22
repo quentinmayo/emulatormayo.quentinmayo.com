@@ -31,9 +31,13 @@ jobs:
           packages: platform-tools
           log-accepted-android-sdk-licenses: false
       - run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - name: Test native gameplay controller
+        run: |
+          bash android/tests/test-state.sh
+          node --test android/tests/gamepad.test.cjs
       - name: Validate native Android app
         working-directory: android
-        run: ./gradlew assembleDebug lintDebug
+        run: ./gradlew assembleDebug assembleDebugAndroidTest lintDebug
       - name: Restore private release signing key
         if: startsWith(github.ref, 'refs/tags/android-v')
         env:
@@ -59,7 +63,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/android-v')
         run: |
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
-          cp android/app/build/outputs/apk/release/app-release.apk Emulatormayo-0.2.0-android.apk
+          cp android/app/build/outputs/apk/release/app-release.apk Emulatormayo-0.2.1-android.apk
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: startsWith(github.ref, 'refs/tags/android-v')
         with:

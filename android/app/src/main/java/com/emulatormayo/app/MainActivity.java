@@ -29,6 +29,7 @@ public final class MainActivity extends ComponentActivity {
     private GameStore store;
     private SharedPreferences prefs;
     private WebView player;
+    private PlayerController playerController;
     private View custom;
     private WebChromeClient.CustomViewCallback customCallback;
     private String pendingCore="nes",pendingBios="",blobToken="",blobName="save",blobMime="application/octet-stream";
@@ -38,7 +39,7 @@ public final class MainActivity extends ComponentActivity {
 
     @Override public void onCreate(Bundle saved){
         super.onCreate(saved);prefs=getSharedPreferences("emulatormayo",MODE_PRIVATE);store=new GameStore(this,prefs);pendingCore=prefs.getString("pickerCore","nes");pendingBios=prefs.getString("pickerBios","");
-        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Color.rgb(14,21,30));
+        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(getColor(R.color.mayo_background));
         root.setOnApplyWindowInsetsListener((view,insets)->{view.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom());return insets;});
         setContentView(root);WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
         library=new NativeLibrary(this,root,store,prefs);library.show();
@@ -71,12 +72,14 @@ public final class MainActivity extends ComponentActivity {
         library.suspend();root.removeAllViews();toolbar=new LinearLayout(this);
         Button back=new Button(this);back.setText("‹ Library");back.setAllCaps(false);back.setOnClickListener(v->confirmLeave());toolbar.addView(back,new LinearLayout.LayoutParams(0,dp(48),1));
         Button full=new Button(this);full.setText("Fullscreen");full.setAllCaps(false);full.setOnClickListener(v->fullscreen(true));toolbar.addView(full);root.addView(toolbar);
-        player=new WebView(this);player.setBackgroundColor(Color.BLACK);player.setKeepScreenOn(true);
+        player=new WebView(this);playerController=new PlayerController(player);player.setBackgroundColor(Color.BLACK);player.setKeepScreenOn(true);
         WebSettings settings=player.getSettings();settings.setJavaScriptEnabled(true);settings.setDomStorageEnabled(true);settings.setAllowFileAccess(false);settings.setAllowContentAccess(false);settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);settings.setMediaPlaybackRequiresUserGesture(true);
         WebViewAssetLoader loader=new WebViewAssetLoader.Builder().addPathHandler("/games/",path->gameFile(path,false)).addPathHandler("/bios/",path->gameFile(path,true)).addPathHandler("/",this::asset).build();
         player.setWebViewClient(new WebViewClient(){
             @Override public WebResourceResponse shouldInterceptRequest(WebView view,WebResourceRequest request){if(!request.getMethod().equals("GET")&&!request.getMethod().equals("HEAD"))return missing();WebResourceResponse response=loader.shouldInterceptRequest(request.getUrl());return response==null?missing():response;}
             @Override public boolean shouldOverrideUrlLoading(WebView view,WebResourceRequest request){return !request.getUrl().toString().startsWith(ORIGIN+"/");}
+            @Override public void onPageStarted(WebView view,String url,android.graphics.Bitmap icon){if(playerController!=null)playerController.loading();}
+            @Override public void onPageFinished(WebView view,String url){if(playerController!=null)playerController.loaded();}
             @Override public void onReceivedError(WebView view,WebResourceRequest request,WebResourceError error){if(request.isForMainFrame())toast("The local player could not start. Return to the library and retry.");}
         });
         WebViewCompat.addWebMessageListener(player,"emulatormayoDownload",Collections.singleton(ORIGIN),(view,message,origin,mainFrame,reply)->{if(mainFrame&&ORIGIN.equals(origin.toString()))receiveBlob(message.getData(),reply);});
@@ -92,14 +95,14 @@ public final class MainActivity extends ComponentActivity {
         player.loadUrl(address);player.requestFocus();
     }
     private WebResourceResponse asset(String path){
-        if(!(path.equals("player.html")||path.equals("player.js")||path.startsWith("data/"))||path.contains("..")||path.contains("\\")||path.indexOf(0)>=0)return missing();
+        if(!(path.equals("player.html")||path.equals("player.js")||path.equals("native-gamepad.js")||path.startsWith("data/"))||path.contains("..")||path.contains("\\")||path.indexOf(0)>=0)return missing();
         try{String type=path.endsWith(".js")?"application/javascript":path.endsWith(".css")?"text/css":path.endsWith(".html")?"text/html":path.endsWith(".json")?"application/json":path.endsWith(".wasm")?"application/wasm":path.endsWith(".svg")?"image/svg+xml":path.endsWith(".png")?"image/png":path.endsWith(".woff2")?"font/woff2":"application/octet-stream";return response(type,getAssets().open(path));}catch(Exception error){return missing();}
     }
     private WebResourceResponse gameFile(String path,boolean bios){try{String id=path.split("/",2)[0];File file=store.file(id,bios);return file==null?missing():response("application/octet-stream",new FileInputStream(file));}catch(Exception error){return missing();}}
     private WebResourceResponse response(String mime,InputStream input){Map<String,String> headers=new HashMap<>();headers.put("Cross-Origin-Opener-Policy","same-origin");headers.put("Cross-Origin-Embedder-Policy","require-corp");headers.put("X-Content-Type-Options","nosniff");headers.put("Referrer-Policy","no-referrer");headers.put("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' blob: data:; img-src 'self' data: blob:; media-src 'self' blob:; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'none'");return new WebResourceResponse(mime,null,200,"OK",headers,input);}
     private WebResourceResponse missing(){return new WebResourceResponse("text/plain","UTF-8",404,"Not found",Collections.emptyMap(),new ByteArrayInputStream(new byte[0]));}
-    private void confirmLeave(){AlertDialog dialog=new AlertDialog.Builder(this).setTitle("Return to your library?").setMessage("Save or export your progress in the player before leaving.").setNegativeButton("Stay",null).setPositiveButton("Library",(d,w)->{closePlayer();library.show();}).create();library.dialog(dialog);dialog.show();}
-    private void closePlayer(){hideCustom();fullscreen(false);clearBlob();if(player!=null){player.stopLoading();player.destroy();player=null;}root.removeAllViews();}
+    private void confirmLeave(){if(playerController!=null)playerController.release();AlertDialog dialog=new AlertDialog.Builder(this).setTitle("Return to your library?").setMessage("Save or export your progress in the player before leaving.").setNegativeButton("Stay",null).setPositiveButton("Library",(d,w)->{closePlayer();library.show();}).create();library.dialog(dialog);dialog.show();}
+    private void closePlayer(){hideCustom();fullscreen(false);clearBlob();if(playerController!=null){playerController.close();playerController=null;}if(player!=null){player.stopLoading();player.destroy();player=null;}root.removeAllViews();}
     private void fullscreen(boolean value){getWindow().getDecorView().setSystemUiVisibility(value?View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY:View.SYSTEM_UI_FLAG_VISIBLE);if(toolbar!=null)toolbar.setVisibility(value?View.GONE:View.VISIBLE);}
     private void hideCustom(){if(custom==null)return;((FrameLayout)getWindow().getDecorView()).removeView(custom);custom=null;root.setVisibility(View.VISIBLE);if(customCallback!=null)customCallback.onCustomViewHidden();customCallback=null;fullscreen(false);}
     private void exportBlob(String url,String disposition,String mime){
@@ -121,10 +124,11 @@ public final class MainActivity extends ComponentActivity {
     private int dp(int value){return Math.round(value*getResources().getDisplayMetrics().density);}
     private static void copy(InputStream input,OutputStream output)throws IOException{byte[] buffer=new byte[65536];int count;while((count=input.read(buffer))!=-1)output.write(buffer,0,count);}
     @android.annotation.SuppressLint("RestrictedApi")
-    @Override public boolean dispatchKeyEvent(android.view.KeyEvent event){if(player==null&&library!=null&&library.key(event))return true;return super.dispatchKeyEvent(event);}
-    @Override public boolean dispatchGenericMotionEvent(android.view.MotionEvent event){if(player==null&&library!=null&&library.motion(event))return true;return super.dispatchGenericMotionEvent(event);}
+    @Override public boolean dispatchKeyEvent(android.view.KeyEvent event){if(playerController!=null&&(player.hasFocus()||custom!=null)&&playerController.key(event))return true;if(player==null&&library!=null&&library.key(event))return true;return super.dispatchKeyEvent(event);}
+    @Override public boolean dispatchGenericMotionEvent(android.view.MotionEvent event){if(playerController!=null&&(player.hasFocus()||custom!=null)&&playerController.motion(event))return true;if(player==null&&library!=null&&library.motion(event))return true;return super.dispatchGenericMotionEvent(event);}
     @Override public void onConfigurationChanged(android.content.res.Configuration config){super.onConfigurationChanged(config);if(player==null&&library!=null)library.show();}
-    @Override protected void onPause(){super.onPause();if(library!=null)library.stopInput();if(player!=null)player.onPause();}
+    @Override protected void onPause(){super.onPause();if(library!=null)library.stopInput();if(playerController!=null)playerController.release();if(player!=null)player.onPause();}
     @Override protected void onResume(){super.onResume();if(player!=null)player.onResume();}
-    @Override protected void onDestroy(){if(player!=null)player.destroy();if(library!=null)library.close();clearBlob();worker.shutdown();super.onDestroy();}
+    @Override public void onWindowFocusChanged(boolean focused){super.onWindowFocusChanged(focused);if(!focused&&playerController!=null)playerController.release();}
+    @Override protected void onDestroy(){if(playerController!=null)playerController.close();if(player!=null)player.destroy();if(library!=null)library.close();clearBlob();worker.shutdown();super.onDestroy();}
 }

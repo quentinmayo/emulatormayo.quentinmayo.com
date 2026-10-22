@@ -10,6 +10,7 @@ form.addEventListener('submit',event=>{
  window.EJS_gameUrl=URL.createObjectURL(game);window.EJS_gameName=game.name;
  if(bios)window.EJS_biosUrl=URL.createObjectURL(bios);
  window.EJS_pathtodata='/data/';window.EJS_startOnLoaded=false;
+ window.EJS_color='#26734d';window.EJS_backgroundColor='#091610';
  window.EJS_onGameStart=()=>{gameStarted=true;document.title=game.name+' · Emulatormayo';};
  document.getElementById('title').textContent=game.name;
  document.getElementById('setup').hidden=true;document.getElementById('playing').hidden=false;
