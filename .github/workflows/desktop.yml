@@ -93,7 +93,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tar -czf artifacts/Emulatormayo-0.1.2-steam-artwork.tar.gz -C desktop/assets/steam icon.png portrait.png landscape.png hero.png logo.png steam-artwork.py
+          tar -czf "artifacts/Emulatormayo-${GITHUB_REF_NAME#desktop-v}-steam-artwork.tar.gz" -C desktop/assets/steam icon.png portrait.png landscape.png hero.png logo.png steam-artwork.py
           cd artifacts
           sha256sum * > SHA256SUMS.txt
           gh release create "$GITHUB_REF_NAME" ./* --repo "$GITHUB_REPOSITORY" \
