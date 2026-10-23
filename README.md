@@ -13,12 +13,12 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 | Platform | Download |
 | --- | --- |
 | Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk) |
-| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-mac-arm64.dmg) |
-| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-mac-x64.dmg) |
-| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-win-x64.exe) |
-| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/Emulatormayo-0.1.2-linux-x86_64.AppImage) |
+| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-arm64.dmg) |
+| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-x64.dmg) |
+| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-win-x64.exe) |
+| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-linux-x86_64.AppImage) |
 
-[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.2) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.2/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
+[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.3) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
 
 On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.1).
 
