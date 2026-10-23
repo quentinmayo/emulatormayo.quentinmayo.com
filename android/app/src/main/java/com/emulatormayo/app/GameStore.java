@@ -30,7 +30,7 @@ final class GameStore {
     }
     String name(Uri uri){try(android.database.Cursor cursor=context.getContentResolver().query(uri,new String[]{OpenableColumns.DISPLAY_NAME},null,null,null)){if(cursor!=null&&cursor.moveToFirst())return cursor.getString(0);}catch(Exception ignored){}return "Imported game";}
     void bios(JSONObject game,Uri uri)throws Exception{copy(uri,new File(folder,game.getString("id")+".bios"));game.put("bios",name(uri));save();}
-    synchronized void remove(JSONObject game){String id=game.optString("id");entries.remove(game);new File(folder,id).delete();new File(folder,id+".bios").delete();save();}
+    synchronized void remove(JSONObject game){String id=game.optString("id");entries.remove(game);new File(folder,id).delete();new File(folder,id+".bios").delete();CoverImages.remove(context,id);save();}
     File file(String id,boolean bios){if(!id.matches("[a-f0-9-]{36}")||find(id)==null)return null;File file=new File(folder,id+(bios?".bios":""));return file.isFile()?file:null;}
     static String system(String core){for(int i=0;i<CORES.length;i++)if(CORES[i].equals(core))return SYSTEMS[i];return core;}
     private void copy(Uri uri,File destination)throws Exception{

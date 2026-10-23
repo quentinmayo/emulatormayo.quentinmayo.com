@@ -1,5 +1,6 @@
 package com.emulatormayo.app;
 
+import com.emulatormayo.boogie.BoogieIntegration;
 import androidx.activity.ComponentActivity;
 import androidx.activity.OnBackPressedCallback;
 import androidx.webkit.WebViewAssetLoader;
@@ -22,17 +23,18 @@ import java.util.concurrent.*;
 
 public final class MainActivity extends ComponentActivity {
     private static final String ORIGIN="https://appassets.androidplatform.net";
-    private static final int IMPORT=41, BIOS=42, SAVE=43;
+    private static final int IMPORT=41, BIOS=42, SAVE=43, COVER=44;
     private LinearLayout root,toolbar;
     private FrameLayout gameContainer;
     private NativeLibrary library;
     private GameStore store;
+    private boolean importingCoop;
     private SharedPreferences prefs;
     private WebView player;
     private PlayerController playerController;
     private View custom;
     private WebChromeClient.CustomViewCallback customCallback;
-    private String pendingCore="nes",pendingBios="",blobToken="",blobName="save",blobMime="application/octet-stream";
+    private String pendingCore="nes",pendingBios="",pendingCover="",blobToken="",blobName="save",blobMime="application/octet-stream";
     private File blob;
     private OutputStream blobStream;
     private final ExecutorService worker=Executors.newSingleThreadExecutor();
@@ -45,14 +47,39 @@ public final class MainActivity extends ComponentActivity {
         library=new NativeLibrary(this,root,store,prefs);library.show();
         getOnBackPressedDispatcher().addCallback(this,new OnBackPressedCallback(true){@Override public void handleOnBackPressed(){if(custom!=null)hideCustom();else if(player!=null)confirmLeave();else library.back();}});
     }
+    void openCoop(){
+        library.stopInput();
+        try{BoogieIntegration.open(this,"emulatormayo");}
+        catch(Exception error){toast("Could not open LAN co-op. Try again.");}
+    }
+    void playCoop(JSONObject game){
+        if(importingCoop)return;
+        if(!"nes".equals(game.optString("core"))){toast("LAN hosting currently supports NES games.");return;}
+        File source=store.file(game.optString("id"),false);
+        if(source==null){toast("This game file is missing. Import it again.");return;}
+        importingCoop=true;library.stopInput();toast("Preparing your private co-op game copy…");
+        String title=game.optString("name","Imported NES game");
+        worker.execute(()->{
+            boolean ready=false;
+            try{BoogieIntegration.importLocal(this,source,title);ready=true;}catch(Exception error){/* Do not expose private paths in the UI. */}
+            final boolean imported=ready;
+            runOnUiThread(()->{importingCoop=false;if(isFinishing()||isDestroyed())return;if(imported)openCoop();else toast("Could not prepare this NES game for co-op. Check the file and available storage.");});
+        });
+    }
     void importGames(String core){pendingCore=core;prefs.edit().putString("pickerCore",core).apply();pick(IMPORT,true);}
     void chooseBios(JSONObject game){pendingBios=game.optString("id");prefs.edit().putString("pickerBios",pendingBios).apply();pick(BIOS,false);}
+    void chooseCover(JSONObject game){pendingCover=game.optString("id");prefs.edit().putString("pickerCover",pendingCover).apply();try{startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("image/*"),COVER);}catch(Exception error){toast("No image picker is available on this device.");}}
     private void pick(int request,boolean multiple){try{Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*").putExtra(Intent.EXTRA_ALLOW_MULTIPLE,multiple);startActivityForResult(intent,request);}catch(Exception error){toast("No file picker is available on this device.");}}
     @Override protected void onActivityResult(int request,int result,Intent data){
         super.onActivityResult(request,result,data);
         if(request==SAVE){
             if(result!=RESULT_OK||data==null||data.getData()==null||blob==null){clearBlob();return;}
             File source=blob;blob=null;Uri destination=data.getData();worker.execute(()->{try(InputStream input=new FileInputStream(source);OutputStream output=getContentResolver().openOutputStream(destination)){if(output==null)throw new IOException();copy(input,output);runOnUiThread(()->toast("Save exported."));}catch(Exception error){runOnUiThread(()->toast("Could not export the save. Retry from the player."));}finally{source.delete();}});return;
+        }
+        if(request==COVER){
+            String id=pendingCover.isEmpty()?prefs.getString("pickerCover",""):pendingCover;pendingCover="";prefs.edit().remove("pickerCover").apply();
+            if(result!=RESULT_OK||data==null||data.getData()==null||store.find(id)==null)return;Uri uri=data.getData();
+            worker.execute(()->{String failure=null;try{CoverImages.importImage(this,id,uri);}catch(Exception|OutOfMemoryError error){failure=error instanceof IOException?error.getMessage():"Could not import this cover image.";}String message=failure;runOnUiThread(()->{if(isFinishing()||isDestroyed())return;library.coverChanged(id);toast(message==null?"Cover saved privately on this device.":message);});});return;
         }
         if(result!=RESULT_OK||data==null)return;
         if(request!=IMPORT&&request!=BIOS)return;
