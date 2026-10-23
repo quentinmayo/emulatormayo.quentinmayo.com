@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { site } from "../site-data";
 import JsonLd from "../components/JsonLd";
+import Appearance from "../components/Appearance";
 import { pageMetadata, siteIdentity } from "../seo";
 import "./globals.css";
 export const viewport: Viewport = { themeColor: "#091610", colorScheme: "dark" };
@@ -14,5 +15,5 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.svg" }
 };
 export default function RootLayout({ children }: Readonly<{children: React.ReactNode}>) {
-  return <html lang="en" data-product={site.kind}><body><JsonLd data={siteIdentity}/>{children}</body></html>;
+  return <html lang="en" data-product={site.kind}><body><Appearance brand="emulatormayo"/><JsonLd data={siteIdentity}/>{children}</body></html>;
 }
