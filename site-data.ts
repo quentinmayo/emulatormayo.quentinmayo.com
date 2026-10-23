@@ -95,35 +95,35 @@ export const site = {
   "sisterUrl": "https://rommayo.quentinmayo.com",
   "seoTitle": "Emulatormayo | Android APK & EmulatorJS Desktop Apps",
   "supportUrl": "https://buymeacoffee.com/quentinmayo",
-  "downloadVersion": "Android v0.2.1 \u00b7 Desktop v0.1.3",
+  "downloadVersion": "Android v0.2.1 \u00b7 Desktop v0.1.4",
   "downloadIntro": "The EmulatorJS runtime is included. Install, choose your own game file and play. No Node.js, npm, Docker or server required.",
-  "releaseUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.3",
+  "releaseUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.4",
   "downloads": [
     {
       "label": "Android",
       "detail": "Android 10+ \u00b7 signed APK \u00b7 native library",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.2/Emulatormayo-0.2.2-android.apk"
     },
     {
       "label": "macOS \u00b7 Apple Silicon",
       "detail": "M-series Macs \u00b7 DMG",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-arm64.dmg"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-arm64.dmg"
     },
     {
       "label": "macOS \u00b7 Intel",
       "detail": "Intel Macs \u00b7 DMG",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-x64.dmg"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-x64.dmg"
     },
     {
       "label": "Windows",
       "detail": "x64 \u00b7 installer",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-win-x64.exe"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-win-x64.exe"
     },
     {
       "label": "Linux / Steam Deck",
       "detail": "x64 \u00b7 AppImage",
-      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-linux-x86_64.AppImage"
+      "file": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-linux-x86_64.AppImage"
     }
   ],
-  "checksumsUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/SHA256SUMS.txt"
+  "checksumsUrl": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/SHA256SUMS.txt"
 };

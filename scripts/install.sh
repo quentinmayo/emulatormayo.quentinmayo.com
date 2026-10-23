@@ -3,8 +3,8 @@
 set -euo pipefail
 APP='Emulatormayo'
 SLUG='emulatormayo'
-VERSION='0.1.3'
-TAG='desktop-v0.1.3'
+VERSION='0.1.4'
+TAG='desktop-v0.1.4'
 REPOSITORY='securelyprogramming/emulatormayo.quentinmayo.com'
 DECK=0
 DRY_RUN=0

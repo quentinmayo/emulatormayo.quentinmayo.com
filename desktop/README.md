@@ -36,3 +36,7 @@ The Deck installer includes original icons, portrait/landscape covers, hero and 
 During Deck gameplay the original EmulatorJS toolbar stays visible and clickable. The separate bottom bar has navigation, Fullscreen and **Quit app**. **Game controls** offers labeled shortcuts to the existing player actions. Open it with touch, **F10**, or **L3 + R3** on a standard gamepad; use D-pad to move, A to select, B to close. Save/load/import/export still use the player’s own handlers. Unsupported engines show a message instead of pretending an action succeeded.
 
 Save/export before leaving. **Quit app** asks before closing; alternatively press **STEAM → Exit game** and confirm. Quitting does not save automatically or log you out. If the player itself is in HTML fullscreen, its toolbar remains available; use Steam’s system menu to exit the app.
+
+Use the top-left **Hide/Show touch controls** button to switch the virtual controller overlay; the preference survives launching another game. It stays inside player fullscreen. Save/export first, then confirm EmulatorJS **Exit** to return to file selection. Cancel keeps the current game open.
+
+The Linux 0.1.4 candidate passed real Steam Deck Desktop Mode NES test-suite boot, fullscreen containment, hide/show, Cancel/Exit and preference retention. Physical buttons and current-update Gaming Mode are recorded separately in the illustrated guide.

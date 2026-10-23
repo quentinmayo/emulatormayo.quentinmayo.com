@@ -2,7 +2,7 @@
 
 A native, Steam-inspired local game library for Android phones, tablets and controller handhelds. **No server or login.** Library, imports, search, favorites, recent games and controller settings are Android Views. Only gameplay uses a WebView with bundled EmulatorJS 4.2.3.
 
-[Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk) · [Checksums & release notes](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.1) · [Setup guide](https://emulatormayo.quentinmayo.com/getting-started)
+[Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.2/Emulatormayo-0.2.2-android.apk) · [Checksums & release notes](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.2) · [Setup guide](https://emulatormayo.quentinmayo.com/getting-started)
 
 ## Play
 
@@ -33,8 +33,12 @@ node --test tests/gamepad.test.cjs
 
 The build verifies the official runtime archive’s SHA-256 before extraction. No runtime download is needed by APK users. Set `EMULATORMAYO_KEYSTORE`, `EMULATORMAYO_STORE_PASSWORD`, `EMULATORMAYO_KEY_ALIAS` and `EMULATORMAYO_KEY_PASSWORD` to build a signed release. Keep signing keys outside Git. Android tag releases use the private GitHub Actions secrets and include checksums. Keep the signing identity stable for future upgrades.
 
-The private asset origin is `https://appassets.androidplatform.net`; network fallback, arbitrary file paths, mixed content and general native scripting bridges are disabled. Save exports use an origin-restricted, token-gated message channel. Native controller forwarding sends bounded JSON only to the bundled local player page; it adds no JavaScript-to-native scripting interface. Held inputs are released on focus loss, app pause, disconnect and player exit. Release WebViews are not debuggable. Authentication and server credentials are not used.
+The private asset origin is `https://appassets.androidplatform.net`; network fallback, arbitrary file paths, mixed content and general native scripting bridges are disabled. Save exports use an origin-restricted, token-gated message channel. A separate exact-message channel lets only the trusted main-frame player return to the native library after EmulatorJS exit. Native controller forwarding sends bounded JSON only to the bundled local player page; it adds no JavaScript-to-native scripting interface. Held inputs are released on focus loss, app pause, disconnect and player exit. Release WebViews are not debuggable. Authentication and server credentials are not used.
 
 Website/application code is MIT licensed. Bundled EmulatorJS and emulator cores retain their upstream licenses: the archive includes `LICENSE`, `UPSTREAM.json`, core reports and source references. [EmulatorJS 4.2.3 source](https://github.com/EmulatorJS/EmulatorJS/tree/v4.2.3) · [core sources](https://github.com/EmulatorJS/EmulatorJS/tree/v4.2.3/data/cores).
 
 No games, BIOS files or keys are included. No third-party ROM sourcing/download support. Use content you are authorized to access. Downloads and use are at your own risk. Independent of EmulatorJS, RetroArch and Valve.
+
+## Touch controls and exit
+
+Use the top-left **Hide touch controls** button on a handheld, and **Show touch controls** when you need the virtual D-pad or action buttons. The choice is remembered and the button stays available inside player fullscreen. The emulator menu and toolbar remain available. Save/export before choosing EmulatorJS **Exit**; Cancel stays in the game, and confirming Exit returns to the native library.

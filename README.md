@@ -12,15 +12,15 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 | Platform | Download |
 | --- | --- |
-| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.1/Emulatormayo-0.2.1-android.apk) |
-| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-arm64.dmg) |
-| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-mac-x64.dmg) |
-| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-win-x64.exe) |
-| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/Emulatormayo-0.1.3-linux-x86_64.AppImage) |
+| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.2/Emulatormayo-0.2.2-android.apk) |
+| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-arm64.dmg) |
+| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-x64.dmg) |
+| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-win-x64.exe) |
+| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-linux-x86_64.AppImage) |
 
-[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.3) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.3/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
+[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.4) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
 
-On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.1).
+On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.2).
 
 Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users should follow the [illustrated guide](https://emulatormayo.quentinmayo.com/steam-deck) for the generated launcher or full manual launch options. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Installation and Desktop Mode launch have been tested on a real Steam Deck; see the illustrated Steam Deck guide for the current gameplay and controller test status.
 
@@ -34,7 +34,7 @@ Physical hardware checks recorded October 22, 2026. These are specific smoke tes
 | --- | --- | --- | --- |
 | Samsung Galaxy S24 Ultra | Android 17 | Signed APK; native local library; C64 homebrew boot; touch controls and player toolbar visible. | Physical external-controller gameplay not verified. |
 | Retroid Pocket 5 | Android 13 | Signed APK; native landscape library; local C64 import and core boot; owner confirmed D-pad, left-stick and A/B native menu navigation. | Gameplay forwarding passes device automation; physical gameplay direction retest pending. |
-| Steam Deck | SteamOS, docked 1920 × 1080 | AppImage 0.1.2 installation; Desktop Mode C64 core boot; clickable toolbar pause/resume; confirmed Quit dialog; Steam artwork installed. | Gaming Mode gameplay and physical controls remain under test. |
+| Steam Deck | SteamOS, docked 1920 × 1080 | Linux 0.1.4 candidate: Steam shortcut launch in Desktop Mode, NES test-suite boot, compact fullscreen touch toggle, Cancel/Exit returning to file selection, and remembered touch-control preference. Earlier AppImage installation, toolbar pause/resume and Quit checks also passed. | Current-update Gaming Mode and physical gameplay controls remain under test. |
 | MacBook Pro (Apple M4 Pro) | macOS, Apple Silicon | C64 core boot; visible player toolbar; pause/resume; save-state export. | Other emulator cores and systems are not certified. |
 
 [Setup and current device notes](https://emulatormayo.quentinmayo.com/getting-started#tested-devices).
