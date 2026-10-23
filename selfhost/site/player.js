@@ -42,3 +42,10 @@ if(window.emulatormayoDesktop){
   catch(error){document.getElementById('player-action-status').textContent=error.message;}
  });
 }
+
+// EmulatorJS confirms Exit before sending this event. Return to file selection.
+window.emulatormayoPlayer = { postMessage: message => {
+ if (message !== 'exit') return;
+ gameStarted = false;
+ location.reload();
+}};

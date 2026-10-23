@@ -1,3 +1,5 @@
+Player update: confirmed EmulatorJS Exit returns to the library/file picker. A top-left Show/Hide touch controls button hides only the virtual gamepad, keeps the original toolbar available, and remembers your choice. The button stays inside the player’s fullscreen container. Native Android host regression checks passed on Retroid Pocket 5 with synthesized inputs; physical Steam Deck verification of this update remains pending.
+
 ## Android controller input and menu update
 
 - Forward the first connected Android gamepad’s buttons, D-pad, sticks and triggers to the local player using standard controller mappings. EmulatorJS Control Settings still handles remapping.

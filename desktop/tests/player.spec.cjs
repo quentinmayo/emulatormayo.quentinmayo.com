@@ -59,3 +59,34 @@ test('player toolbar forwards existing save hooks, refuses unavailable actions, 
  await page.locator('[data-player-action="saveState"]').click();expect(await page.evaluate(()=>window.actions)).toEqual(['save']);
  await page.keyboard.press('Escape');await expect(page.locator('#player-actions')).toBeHidden();
 });
+
+test('player touch toggle preserves the original toolbar and preference, then confirmed exit returns home',async()=>{
+ await page.evaluate(() => {
+ const parent = document.createElement('div'); parent.id='engine'; parent.tabIndex=-1; parent.style.cssText='position:relative;width:600px;height:300px';
+ const pad = document.createElement('div'); pad.className='ejs_virtualGamepad_parent'; pad.textContent='Touch D-pad';
+ const toolbar=document.createElement('button'); toolbar.id='original-toolbar'; toolbar.textContent='Save state';
+ parent.append(pad,toolbar); document.body.prepend(parent);
+ const handlers={}; window.EJS_emulator={started:true,virtualGamepad:pad,elements:{parent},toggleVirtualGamepad:show=>pad.style.display=show?'':'none',on:(event,callback)=>(handlers[event]??=[]).push(callback),callEvent:event=>(handlers[event]??[]).forEach(callback=>callback())};
+});
+ const toggle=page.getByRole('button',{name:'Hide touch controls'});
+ await expect(toggle).toBeVisible();expect(await toggle.evaluate(b=>b.getBoundingClientRect().width<b.parentElement.getBoundingClientRect().width/2)).toBe(true);await toggle.click();
+ await expect(page.locator('.ejs_virtualGamepad_parent')).toBeHidden();
+ await expect(page.locator('#original-toolbar')).toBeVisible();
+ await expect(page.getByRole('button',{name:'Show touch controls'})).toBeVisible();
+ expect(await page.evaluate(()=>document.activeElement.id)).toBe('engine');
+ // A fresh page/game must retain the choice, without retaining the exited game.
+ await page.reload();
+ await page.evaluate(() => {
+ const parent = document.createElement('div'); parent.id='engine'; parent.tabIndex=-1; parent.style.cssText='position:relative;width:600px;height:300px';
+ const pad = document.createElement('div'); pad.className='ejs_virtualGamepad_parent'; pad.textContent='Touch D-pad';
+ const toolbar=document.createElement('button'); toolbar.id='original-toolbar'; toolbar.textContent='Save state';
+ parent.append(pad,toolbar); document.body.prepend(parent);
+ const handlers={}; window.EJS_emulator={started:true,virtualGamepad:pad,elements:{parent},toggleVirtualGamepad:show=>pad.style.display=show?'':'none',on:(event,callback)=>(handlers[event]??=[]).push(callback),callEvent:event=>(handlers[event]??[]).forEach(callback=>callback())};
+});
+ await expect(page.getByRole('button',{name:'Show touch controls'})).toBeVisible();
+ await expect(page.locator('.ejs_virtualGamepad_parent')).toBeHidden();
+ await page.getByRole('button',{name:'Show touch controls'}).click();
+ await expect(page.locator('.ejs_virtualGamepad_parent')).toBeVisible();
+ await page.evaluate(()=>{document.getElementById('setup').hidden=true;document.getElementById('playing').hidden=false;window.EJS_emulator.callEvent('exit');});
+ await expect(page.locator('#setup')).toBeVisible();await expect(page.locator('#engine')).toHaveCount(0);
+});

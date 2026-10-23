@@ -63,7 +63,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/android-v')
         run: |
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
-          cp android/app/build/outputs/apk/release/app-release.apk Emulatormayo-0.2.1-android.apk
+          cp android/app/build/outputs/apk/release/app-release.apk "Emulatormayo-${GITHUB_REF_NAME#android-v}-android.apk"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: startsWith(github.ref, 'refs/tags/android-v')
         with:

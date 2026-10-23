@@ -83,6 +83,12 @@ public final class MainActivity extends ComponentActivity {
             @Override public void onReceivedError(WebView view,WebResourceRequest request,WebResourceError error){if(request.isForMainFrame())toast("The local player could not start. Return to the library and retry.");}
         });
         WebViewCompat.addWebMessageListener(player,"emulatormayoDownload",Collections.singleton(ORIGIN),(view,message,origin,mainFrame,reply)->{if(mainFrame&&ORIGIN.equals(origin.toString()))receiveBlob(message.getData(),reply);});
+        WebViewCompat.addWebMessageListener(player,"emulatormayoPlayer",Collections.singleton(ORIGIN),(view,message,origin,mainFrame,reply)->{
+            if(view==player&&mainFrame&&ORIGIN.equals(origin.toString())&&"/player.html".equals(Uri.parse(Objects.toString(view.getUrl(),"")).getPath())&&"exit".equals(message.getData())){
+                // EmulatorJS has already confirmed Exit. Defer destruction until its callback returns.
+                root.post(()->{if(player==view){closePlayer();library.show();}});
+            }
+        });
         player.setWebChromeClient(new WebChromeClient(){
             @Override public boolean onJsAlert(WebView view,String url,String text,JsResult result){new AlertDialog.Builder(MainActivity.this).setMessage(text).setPositiveButton("OK",(d,w)->result.confirm()).setOnCancelListener(d->result.cancel()).show();return true;}
             @Override public void onShowCustomView(View view,CustomViewCallback callback){if(custom!=null){callback.onCustomViewHidden();return;}custom=view;customCallback=callback;root.setVisibility(View.GONE);((FrameLayout)getWindow().getDecorView()).addView(view,new FrameLayout.LayoutParams(-1,-1));fullscreen(true);}
@@ -95,7 +101,7 @@ public final class MainActivity extends ComponentActivity {
         player.loadUrl(address);player.requestFocus();
     }
     private WebResourceResponse asset(String path){
-        if(!(path.equals("player.html")||path.equals("player.js")||path.equals("native-gamepad.js")||path.startsWith("data/"))||path.contains("..")||path.contains("\\")||path.indexOf(0)>=0)return missing();
+        if(!(path.equals("player.html")||path.equals("player.js")||path.equals("native-gamepad.js")||path.equals("mayo-player.js")||path.startsWith("data/"))||path.contains("..")||path.contains("\\")||path.indexOf(0)>=0)return missing();
         try{String type=path.endsWith(".js")?"application/javascript":path.endsWith(".css")?"text/css":path.endsWith(".html")?"text/html":path.endsWith(".json")?"application/json":path.endsWith(".wasm")?"application/wasm":path.endsWith(".svg")?"image/svg+xml":path.endsWith(".png")?"image/png":path.endsWith(".woff2")?"font/woff2":"application/octet-stream";return response(type,getAssets().open(path));}catch(Exception error){return missing();}
     }
     private WebResourceResponse gameFile(String path,boolean bios){try{String id=path.split("/",2)[0];File file=store.file(id,bios);return file==null?missing():response("application/octet-stream",new FileInputStream(file));}catch(Exception error){return missing();}}

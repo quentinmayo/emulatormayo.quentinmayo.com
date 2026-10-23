@@ -1,3 +1,5 @@
+Player update: confirmed EmulatorJS Exit returns to the library/file picker. A top-left Show/Hide touch controls button hides only the virtual gamepad, keeps the original toolbar available, and remembers your choice. The button stays inside the player’s fullscreen container. Native Android host regression checks passed on Retroid Pocket 5 with synthesized inputs; physical Steam Deck verification of this update remains pending.
+
 Green theme update: dark forest backgrounds, mint controls and focus outlines, matching app icons and refreshed Steam artwork. The player toolbar, quit controls and self-hosted player use the same palette. Game content keeps its own colors.
 
 Steam Deck update: original Steam library art and app icons, a visible Quit app control, save-before-exit guidance, and clickable EmulatorJS toolbar controls during Deck gameplay. A labeled action menu supports touch, F10 and a standard controller (L3 + R3, D-pad, A/B). The artwork helper preserves existing shortcut IDs and controls and requires Steam to be closed.
@@ -6,10 +8,10 @@ Install Emulatormayo, choose a supported system and your own local game, and pre
 
 | Platform | Package |
 | --- | --- |
-| macOS Apple Silicon | `Emulatormayo-0.1.3-mac-arm64.dmg` |
-| macOS Intel | `Emulatormayo-0.1.3-mac-x64.dmg` |
-| Windows x64 | `Emulatormayo-0.1.3-win-x64.exe` |
-| Linux x64 / Steam Deck | `Emulatormayo-0.1.3-linux-x86_64.AppImage` |
+| macOS Apple Silicon | `Emulatormayo-0.1.4-mac-arm64.dmg` |
+| macOS Intel | `Emulatormayo-0.1.4-mac-x64.dmg` |
+| Windows x64 | `Emulatormayo-0.1.4-win-x64.exe` |
+| Linux x64 / Steam Deck | `Emulatormayo-0.1.4-linux-x86_64.AppImage` |
 
 Download the appropriate file from Assets below. Open the DMG or Windows installer; on Linux make the AppImage executable. Steam Deck users can add it as a non-Steam app and use `--deck`. Checksums are in `SHA256SUMS.txt`.
 
