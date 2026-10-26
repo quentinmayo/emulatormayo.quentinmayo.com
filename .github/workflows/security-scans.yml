@@ -66,6 +66,7 @@ jobs:
       - run: npm ci
       - run: npm audit --audit-level=high
       - run: npm run test:install
+      - run: npm run test:cast
       - run: npm run build
 
   security-results:
