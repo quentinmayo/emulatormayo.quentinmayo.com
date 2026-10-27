@@ -22,5 +22,5 @@ C64 homebrew core boot tested on Galaxy S24 Ultra and Retroid Pocket 5. See the 
 No ROMs, BIOS files or keys included. Upstream emulator/runtime licenses apply; source and license references are in the Android guide. Use only content you are authorized to access. Downloads and use are at your own risk. Independent of EmulatorJS and Valve.
 
 Setup: https://emulatormayo.quentinmayo.com/getting-started
-Source: https://github.com/securelyprogramming/emulatormayo.quentinmayo.com
+Source: https://github.com/quentinmayo/emulatormayo.quentinmayo.com
 Support the AI token fund ☕ https://buymeacoffee.com/quentinmayo

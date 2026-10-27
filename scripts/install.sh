@@ -5,7 +5,7 @@ APP='Emulatormayo'
 SLUG='emulatormayo'
 VERSION='0.1.4'
 TAG='desktop-v0.1.4'
-REPOSITORY='securelyprogramming/emulatormayo.quentinmayo.com'
+REPOSITORY='quentinmayo/emulatormayo.quentinmayo.com'
 DECK=0
 DRY_RUN=0
 for option in "$@"; do

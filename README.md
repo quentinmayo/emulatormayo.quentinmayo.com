@@ -12,15 +12,15 @@ A public, login-free Next.js website for Emulatormayo. Dark library-inspired des
 
 | Platform | Download |
 | --- | --- |
-| Android 10+ | [Download signed APK](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/android-v0.2.2/Emulatormayo-0.2.2-android.apk) |
-| macOS Apple Silicon | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-arm64.dmg) |
-| macOS Intel | [Download DMG](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-x64.dmg) |
-| Windows x64 | [Download installer](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-win-x64.exe) |
-| Linux x64 / Steam Deck | [Download AppImage](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-linux-x86_64.AppImage) |
+| Android 10+ | [Download signed APK](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/android-v0.2.2/Emulatormayo-0.2.2-android.apk) |
+| macOS Apple Silicon | [Download DMG](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-arm64.dmg) |
+| macOS Intel | [Download DMG](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-mac-x64.dmg) |
+| Windows x64 | [Download installer](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-win-x64.exe) |
+| Linux x64 / Steam Deck | [Download AppImage](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/Emulatormayo-0.1.4-linux-x86_64.AppImage) |
 
-[Release notes & all assets](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.4) · [SHA-256 checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
+[Release notes & all assets](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.4) · [SHA-256 checksums](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/download/desktop-v0.1.4/SHA256SUMS.txt) · [Desktop guide](desktop/README.md)
 
-On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.2).
+On Android, install the APK, tap Import, choose a system and select your own games. The Steam-inspired library, search, favorites, recents, import and controller settings use native Android Views. WebView handles gameplay only. See [Android release notes & checksums](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/tag/android-v0.2.2).
 
 Open the DMG or Windows installer. On Linux, make the AppImage executable; Steam Deck users should follow the [illustrated guide](https://emulatormayo.quentinmayo.com/steam-deck) for the generated launcher or full manual launch options. Mac apps are ad-hoc signed and not notarized; Windows installers are unsigned. Saves stay in the app's local profile; export backups before deleting app data or moving devices. Installation and Desktop Mode launch have been tested on a real Steam Deck; see the illustrated Steam Deck guide for the current gameplay and controller test status.
 
@@ -52,11 +52,11 @@ npm run dev
 
 Use a dedicated project and a public Git application, branch `main`, Dockerfile build pack, `/Dockerfile`, exposed port `8080`, health check `/`, and the HTTPS production domain above. The app runs independently of the upstream game service.
 
-The repository's workflow calls the organization's pinned centralized security workflow, runs the production build and dependency audit, and requests a Coolify deployment only after both pass on `main`. Configure repository variable `COOLIFY_APPLICATION_UUID` and secret `COOLIFY_API_TOKEN`; credentials never go into the source or browser bundle. Organization onboarding attaches the shared security configuration and runner access.
+This public distribution repository runs standalone CodeQL, a pinned Gitleaks history scan, the production build, installer checks and dependency audit. Internal development uses separate centralized organization scans. No deployment credentials are included in this public mirror.
 
 ## Security & responsibility
 
-Centralized scans include CodeQL plus centralized secret detection, dependency, infrastructure and workflow analysis as provided by `securelyprogramming/security-workflows`. A configured workflow is not proof that a particular scan has passed; inspect the latest Actions results and Security tab.
+Check this repository’s Actions results and Security tab for the status of its public source checks. Configuration alone does not mean a scan has passed. Internal development scans are separate.
 
 Use only content you are authorized to access. Downloads and use are at your own risk. This independent companion is not affiliated with upstream projects or Valve. No third-party ROM sourcing is supported. Website code is MIT licensed; upstream applications, runtimes and emulator cores retain their own licenses.
 

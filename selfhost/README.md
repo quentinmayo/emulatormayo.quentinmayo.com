@@ -1,6 +1,6 @@
 # Emulatormayo private player
 
-A small, self-hosted browser player around the official **EmulatorJS 4.2.3** release. This is separate from the public Next.js marketing website. For a desktop app that needs no server, use the [macOS, Windows or Linux releases](https://github.com/securelyprogramming/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.1). No Android APK is released yet.
+A small, self-hosted browser player around the official **EmulatorJS 4.2.3** release. This is separate from the public Next.js marketing website. For a desktop app that needs no server, use the [macOS, Windows or Linux releases](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/releases/tag/desktop-v0.1.1). No Android APK is released yet.
 
 ```sh
 cd selfhost

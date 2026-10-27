@@ -8,7 +8,7 @@
   "homepage": "https://emulatormayo.quentinmayo.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/securelyprogramming/emulatormayo.quentinmayo.com.git"
+    "url": "https://github.com/quentinmayo/emulatormayo.quentinmayo.com.git"
   },
   "main": "main.cjs",
   "scripts": {
