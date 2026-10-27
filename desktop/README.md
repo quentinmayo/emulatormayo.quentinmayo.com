@@ -15,7 +15,7 @@ These commands are for contributors, not installation:
 ```sh
 cd desktop
 npm ci
-python3 -m pip install py7zr==1.0.0
+python3 -m pip install py7zr==1.1.3
 python3 scripts/prepare-runtime.py
 npm start
 npm test
@@ -23,7 +23,7 @@ npm run test:desktop
 npm run dist
 ```
 
-The preparation step verifies the upstream archive's pinned SHA-256, then copies the shared self-hosted player and upstream runtime into ignored build folders. Python and py7zr are build-time tools only. End users receive everything inside the application.
+The preparation step verifies the upstream archive's pinned SHA-256, then copies the shared self-hosted player and upstream runtime into ignored build folders. Python 3.10 or newer and py7zr are build-time tools only (CI uses Python 3.12). End users receive everything inside the application.
 
 GitHub Actions tests Linux, Windows, macOS arm64 and macOS x64. A `desktop-v<version>` tag builds each installer and publishes all packages with `SHA256SUMS.txt` after every platform passes. Keep the tag version aligned with `desktop/package.json`. Releases remain public alphas while cross-device compatibility is being tested.
 

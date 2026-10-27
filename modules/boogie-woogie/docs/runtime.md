@@ -2,7 +2,7 @@
 
 The Android NES host uses the same unmodified **EmulatorJS 4.2.3** runtime as the working prototype. Preparing the build does not upgrade EmulatorJS, rebuild a core or alter its settings. Guests receive streamed media and do not need an emulator runtime.
 
-Create a build-only virtual environment, install the tested archive reader, then prepare the runtime:
+Use Python 3.10 or newer (CI uses 3.12). Create a build-only virtual environment, install the archive reader, then prepare the runtime:
 
 ```sh
 python3 -m venv .venv-runtime
@@ -10,7 +10,7 @@ python3 -m venv .venv-runtime
 .venv-runtime/bin/python scripts/prepare-runtime.py
 ```
 
-`py7zr==1.0.0` is pinned to the version used to validate this extraction. It is a build-time dependency, not part of the broker or guest. The preparation script downloads the [official 4.2.3 archive](https://github.com/EmulatorJS/EmulatorJS/releases/download/v4.2.3/4.2.3.7z) to a user cache and verifies this exact SHA-256 before extraction:
+`py7zr==1.1.3` is the pinned build-time archive reader, including the upstream security fixes in [1.1.3](https://github.com/miurahr/py7zr/releases/tag/v1.1.3). It is not part of the broker or guest; the EmulatorJS archive and core bytes remain pinned unchanged. The preparation script downloads the [official 4.2.3 archive](https://github.com/EmulatorJS/EmulatorJS/releases/download/v4.2.3/4.2.3.7z) to a user cache and verifies this exact SHA-256 before extraction:
 
 ```text
 07d451bc06fa3ad04ab30d9b94eb63ac34ad0babee52d60357b002bde8f3850b

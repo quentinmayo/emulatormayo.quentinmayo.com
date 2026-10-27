@@ -152,7 +152,7 @@ def main():
         import py7zr
     except ImportError:
         parser.exit(1, "Install build dependencies with: python -m pip install -r scripts/requirements-runtime.txt\n")
-    if py7zr.__version__ != "1.0.0":
+    if py7zr.__version__ != "1.1.3":
         parser.exit(1, "Use the pinned py7zr version from scripts/requirements-runtime.txt\n")
     lock = ROOT / ".runtime-prepare.lock"
     try:
