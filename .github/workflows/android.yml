@@ -2,11 +2,11 @@ name: Android APK
 on:
   pull_request:
     branches: [main]
-    paths: ['android/**', 'modules/boogie-woogie', '.gitmodules', 'desktop/scripts/prepare-runtime.py', '.github/workflows/android.yml']
+    paths: ['android/**', 'modules/boogie-woogie/**', '.gitmodules', 'desktop/scripts/prepare-runtime.py', '.github/workflows/android.yml']
   push:
     branches: [main]
     tags: ['android-v*']
-    paths: ['android/**', 'modules/boogie-woogie', '.gitmodules', 'desktop/scripts/prepare-runtime.py', '.github/workflows/android.yml']
+    paths: ['android/**', 'modules/boogie-woogie/**', '.gitmodules', 'desktop/scripts/prepare-runtime.py', '.github/workflows/android.yml']
   workflow_dispatch:
 permissions:
   contents: read
