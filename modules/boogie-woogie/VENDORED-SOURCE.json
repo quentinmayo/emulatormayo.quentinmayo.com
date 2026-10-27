@@ -1,0 +1,6 @@
+{
+  "upstreamProject": "Boogie Woogie",
+  "revision": "703ffc035fede4a4fe86ce4dcb938595a33140f5",
+  "reason": "Reviewed source vendored so public Android builds do not require organization-only repository access.",
+  "containsRuntimeBinaries": false
+}
