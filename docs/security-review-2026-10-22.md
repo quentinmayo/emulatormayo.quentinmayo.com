@@ -10,4 +10,4 @@ Reviewed the Android local import/player/export boundaries, Electron protocol an
 
 No additional exploitable issue was established in these inspected Emulatormayo boundaries. Upstream runtime/core vulnerabilities, malicious game files, device compromise and every possible document provider were not exhaustively assessed. The self-hosted web player has no built-in authentication; its README describes private-network deployment.
 
-The related [Rommayo review](https://github.com/securelyprogramming/Rommayo/blob/main/docs/security-review-2026-10-22.md) documents repaired malformed-request handling, authenticated Android redirect handling and release workflow findings.
+The related [Rommayo review](https://github.com/quentinmayo/Rommayo/blob/main/docs/security-review-2026-10-22.md) documents repaired malformed-request handling, authenticated Android redirect handling and release workflow findings.

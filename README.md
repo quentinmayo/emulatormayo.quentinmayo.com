@@ -96,21 +96,20 @@ Android contributors: [controller menu validation](docs/android-controller-tests
 
 ## Boogie Woogie co-op preview
 
-**MayoCast is experimental and still in progress.** TV latency is currently too high for comfortable gameplay; testing is ongoing. It needs a compatible Google TV/Android TV device with the receiver installed and test-device registration for the unpublished Cast app. Older Cast-only Chromecast devices are unsupported. The [Boogie Woogie source preview](https://github.com/securelyprogramming/boogie-woogie/releases/tag/v0.1.0-experimental.20261025) records the [verified features and remaining limits](https://github.com/securelyprogramming/boogie-woogie/blob/fa0af8166b0677a11cbad8a6be77a47499452d25/docs/tv-receiver.md#latency-status-and-next-steps); runtime-bearing app downloads are held pending release checks. The [MayoCast setup page](https://emulatormayo.quentinmayo.com/cast/receiver.html) is a setup-only fallback and cannot display gameplay.
+**MayoCast is experimental and still in progress.** TV latency is currently too high for comfortable gameplay; testing is ongoing. It needs a compatible Google TV/Android TV device with the receiver installed and test-device registration for the unpublished Cast app. Older Cast-only Chromecast devices are unsupported. The current [shared co-op source](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/tree/main/modules/boogie-woogie) is available for review; newer casting experiments and runtime-bearing downloads remain subject to release checks. The [MayoCast setup page](https://emulatormayo.quentinmayo.com/cast/receiver.html) is a setup-only fallback and cannot display gameplay.
 
-Android now includes a native **Co-op** section powered by the shared [Boogie Woogie project](https://github.com/securelyprogramming/boogie-woogie). It also runs as its own Android app, browser guest and native SDL desktop/Steam Deck guest. The current Android host supports NES games, shared Player 1, one independent Player 2 and watch-only guests; every join requires host approval. Players 3/4, Bluetooth transport and native desktop hosting remain future work.
+Android now includes a native **Co-op** section powered by the shared [Boogie Woogie project](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/tree/main/modules/boogie-woogie). It also runs as its own Android app, browser guest and native SDL desktop/Steam Deck guest. The current Android host supports NES games, shared Player 1, one independent Player 2 and watch-only guests; every join requires host approval. Players 3/4, Bluetooth transport and native desktop hosting remain future work.
 
-Use [the setup guide](https://github.com/securelyprogramming/boogie-woogie/blob/main/docs/setup.md) to start a private HTTPS LAN broker and import host/guest pairing files. Co-op saves remain host-local in this preview; they are not interchangeable with the native Qt/SDL player's RomM-synchronized states. Standalone and embedded installations keep separate pairing and checkpoints.
+Use [the setup guide](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/blob/main/modules/boogie-woogie/docs/setup.md) to start a private HTTPS LAN broker and import host/guest pairing files. Co-op saves remain host-local in this preview; they are not interchangeable with the native Qt/SDL player's RomM-synchronized states. Standalone and embedded installations keep separate pairing and checkpoints.
 
-For Android source builds, initialize the pinned shared module and prepare its verified runtime before running Gradle:
+For Android source builds, use the vendored shared module and prepare its verified runtime before running Gradle:
 
 ```sh
-git submodule update --init --recursive
 python3 -m venv .venv-boogie
 .venv-boogie/bin/python -m pip install -r modules/boogie-woogie/scripts/requirements-runtime.txt
 .venv-boogie/bin/python modules/boogie-woogie/scripts/prepare-runtime.py
 ```
 
-Use JDK 21 and Android SDK 36. [Android module details and display/audio settings](https://github.com/securelyprogramming/boogie-woogie/blob/main/android/README.md) describe the supported options and per-game defaults. These are frontend improvements; the emulator cores remain unchanged. Source integration and automated checks do not establish a new public APK release; complete device and corresponding-source acceptance is tracked before distributing runtime-bearing builds.
+Use JDK 21 and Android SDK 36. [Android module details and display/audio settings](https://github.com/quentinmayo/emulatormayo.quentinmayo.com/blob/main/modules/boogie-woogie/android/README.md) describe the supported options and per-game defaults. These are frontend improvements; the emulator cores remain unchanged. Source integration and automated checks do not establish a new public APK release; complete device and corresponding-source acceptance is tracked before distributing runtime-bearing builds.
 
 In Emulatormayo, open **Co-op** to join, or select an imported NES game and choose **Play co-op** to host. Emulatormayo remains local and needs no account. The source build also needs its existing `python desktop/scripts/prepare-runtime.py` step for the ordinary local player.
