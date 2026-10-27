@@ -66,7 +66,7 @@ jobs:
       - name: Verify macOS bundle signature
         if: runner.os == 'macOS' && (startsWith(github.ref, 'refs/tags/desktop-v') || github.event_name == 'workflow_dispatch')
         run: for bundle in release/*/*.app; do codesign --verify --deep --strict "$bundle"; done
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: startsWith(github.ref, 'refs/tags/desktop-v') || github.event_name == 'workflow_dispatch'
         with:
           name: ${{ matrix.name }}
